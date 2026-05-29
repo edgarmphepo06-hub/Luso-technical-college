@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Luso Technical College - Practical Skills for Employment & Entrepreneurship. Empowering Malawian youth through hands-on technical and vocational education.">
+    <meta name="keywords" content="Luso Technical College, Malawi, vocational training, technical education, Lilongwe, Blantyre, practical skills">
+    <meta name="author" content="Luso Technical College">
+    <meta property="og:title" content="Luso Technical College - Agency for Change">
+    <meta property="og:description" content="Practical Skills for Employment & Entrepreneurship. Empowering Malawian youth through hands-on technical and vocational education.">
+    <meta property="og:image" content="images/LOGO.jpg">
+    <meta property="og:type" content="website">
+    <title>Luso Technical College | Agency for Change</title>
+    <link rel="icon" href="images/LOGO.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary-blue: #1a3a6b;
+            --primary-blue-light: #2a5298;
+            --blue-accent: #3b7dd8;
+            --gold: #f5a623;
+            --gold-light: #ffc44d;
+            --white: #ffffff;
+            --off-white: #f8f9fa;
+            --light-gray: #e9ecef;
+            --text-dark: #2d3436;
+            --text-gray: #636e72;
+            --text-light: #b2bec3;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 80px 0; }
+
+        .section-title {
+            font-size: 2.2rem; font-weight: 700; color: var(--primary-blue);
+            margin-bottom: 15px; text-align: center; position: relative;
+        }
+        .section-title::after {
+            content: ''; display: block; width: 80px; height: 4px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            margin: 15px auto 0; border-radius: 2px;
+        }
+        .section-subtitle {
+            text-align: center; color: var(--text-gray); font-size: 1.05rem;
+            max-width: 700px; margin: 0 auto 50px; font-weight: 300;
+        }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 32px; border-radius: 50px; font-weight: 600;
+            font-size: 1rem; cursor: pointer; transition: var(--transition);
+            border: none; font-family: inherit;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--primary-blue);
+            box-shadow: 0 4px 15px rgba(245, 166, 35, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(245, 166, 35, 0.4); }
+        .btn-outline { background: transparent; color: var(--white); border: 2px solid var(--white); }
+        .btn-outline:hover { background: var(--white); color: var(--primary-blue); transform: translateY(-3px); }
+        .btn-blue {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-light));
+            color: var(--white); box-shadow: 0 4px 15px rgba(26, 58, 107, 0.3);
+        }
+        .btn-blue:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(26, 58, 107, 0.4); }
+        .btn-whatsapp { background: #25D366; color: white; }
+        .btn-whatsapp:hover { background: #1da851; transform: translateY(-3px); }
+
+        /* NAVIGATION */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08); transition: var(--transition); padding: 0 20px;
+        }
+        .navbar.scrolled { background: rgba(255,255,255,0.98); box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 70px; }
+        .nav-logo { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.3rem; color: var(--primary-blue); }
+        .nav-logo img { height: 45px; width: auto; border-radius: 8px; }
+        .nav-logo span { font-size: 0.9rem; color: var(--text-gray); font-weight: 300; }
+        .nav-links { display: flex; align-items: center; gap: 30px; }
+        .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--text-dark); transition: var(--transition); position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gold); transition: var(--transition); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-cta { padding: 10px 22px; font-size: 0.85rem; background: linear-gradient(135deg,var(--gold),var(--gold-light)); color: var(--primary-blue); border-radius: 50px; font-weight: 600; transition: var(--transition); }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(245,166,35,0.3); }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; padding: 5px; }
+        .hamburger span { width: 28px; height: 3px; background: var(--primary-blue); border-radius: 3px; transition: var(--transition); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-6px); }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(26,58,107,0.7), rgba(42,82,152,0.65)), url('images/HOME.jpg') center/cover no-repeat fixed;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            color: var(--white); padding: 100px 20px 60px; position: relative; overflow: hidden;
+        }
+        .hero-content { max-width: 850px; position: relative; z-index: 2; }
+        .hero-motto {
+            display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(5px);
+            padding: 8px 24px; border-radius: 50px; font-size: 0.9rem; font-weight: 500;
+            letter-spacing: 3px; text-transform: uppercase; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.2);
+        }
+        .hero h1 {
+            font-size: 3.5rem; font-weight: 800; line-height: 1.15; margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--white), var(--gold-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero p { font-size: 1.2rem; color: rgba(255,255,255,0.9); margin-bottom: 15px; font-weight: 300; }
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 35px; }
+        .hero-scroll { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite; color: rgba(255,255,255,0.7); font-size: 1.5rem; cursor: pointer; }
+        @keyframes bounce { 0%,20%,50%,80%,100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-15px); } 60% { transform: translateX(-50%) translateY(-8px); } }
+
+        /* ABOUT */
+        .about { background: var(--white); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-content h2 { font-size: 2rem; color: var(--primary-blue); margin-bottom: 20px; }
+        .about-content p { color: var(--text-gray); margin-bottom: 20px; font-size: 1rem; }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+        .about-feature-item { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; color: var(--text-dark); }
+        .about-feature-item i { color: var(--gold); font-size: 1rem; }
+        .about-image { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+        .about-image img { width: 100%; height: 400px; object-fit: cover; }
+        .about-image::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to top, rgba(26,58,107,0.4), transparent); }
+
+        /* PROGRAMS */
+        .programs { background: var(--off-white); }
+        .programs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .program-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); cursor: pointer; }
+        .program-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+        .program-card-image { height: 200px; overflow: hidden; }
+        .program-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .program-card:hover .program-card-image img { transform: scale(1.08); }
+        .program-card-content { padding: 20px; }
+        .program-card-content h3 { font-size: 1.15rem; font-weight: 600; color: var(--primary-blue); margin-bottom: 8px; }
+        .program-card-content p { color: var(--text-gray); font-size: 0.88rem; margin-bottom: 15px; }
+        .program-tag { display: inline-block; padding: 4px 14px; background: var(--light-gray); border-radius: 50px; font-size: 0.78rem; color: var(--text-gray); font-weight: 500; }
+
+        /* SUPPORT */
+        .support { background: var(--white); }
+        .support-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
+        .support-card { text-align: center; padding: 35px 25px; border-radius: var(--radius); background: var(--off-white); transition: var(--transition); }
+        .support-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+        .support-icon { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.8rem; background: linear-gradient(135deg,var(--gold),var(--gold-light)); color: var(--primary-blue); }
+        .support-card h3 { font-size: 1.1rem; font-weight: 600; color: var(--primary-blue); margin-bottom: 10px; }
+        .support-card p { color: var(--text-gray); font-size: 0.9rem; }
+
+        /* CAMPUSES */
+        .campuses { background: var(--primary-blue); color: var(--white); }
+        .campuses .section-title { color: var(--white); }
+        .campuses .section-title::after { background: linear-gradient(135deg,var(--gold),var(--gold-light)); }
+        .campuses .section-subtitle { color: rgba(255,255,255,0.7); }
+        .campuses-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .campus-card { background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border-radius: var(--radius); padding: 35px; border: 1px solid rgba(255,255,255,0.1); transition: var(--transition); }
+        .campus-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-5px); }
+        .campus-card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--gold-light); }
+        .campus-card p { color: rgba(255,255,255,0.85); margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px; }
+        .campus-card i { color: var(--gold); margin-top: 3px; }
+
+        /* WHY CHOOSE */
+        .why-choose { background: var(--off-white); }
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .why-card { background: var(--white); padding: 30px; border-radius: var(--radius); text-align: center; transition: var(--transition); box-shadow: var(--shadow); }
+        .why-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .why-number { font-size: 2.5rem; font-weight: 800; color: var(--gold); opacity: 0.3; margin-bottom: 5px; }
+        .why-card h3 { font-size: 1.1rem; font-weight: 600; color: var(--primary-blue); margin-bottom: 8px; }
+        .why-card p { color: var(--text-gray); font-size: 0.9rem; }
+
+        /* GALLERY */
+        .gallery { background: var(--white); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
+        .gallery-item { border-radius: var(--radius-sm); overflow: hidden; height: 220px; cursor: pointer; position: relative; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-item .gallery-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 15px; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); color: white; opacity: 0; transition: var(--transition); }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-item .gallery-overlay span { font-size: 0.85rem; font-weight: 500; }
+
+        /* TESTIMONIALS */
+        .testimonials { background: var(--off-white); }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 30px; }
+        .testimonial-card { background: var(--white); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow); position: relative; }
+        .testimonial-card::before { content: '"'; position: absolute; top: 10px; left: 20px; font-size: 4rem; color: var(--gold); opacity: 0.2; font-family: Georgia, serif; line-height: 1; }
+        .testimonial-card p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 20px; font-style: italic; padding-top: 20px; }
+        .testimonial-author { display: flex; align-items: center; gap: 15px; }
+        .testimonial-avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg,var(--primary-blue),var(--blue-accent)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 1.2rem; }
+        .testimonial-info h4 { font-size: 1rem; font-weight: 600; color: var(--primary-blue); }
+        .testimonial-info span { font-size: 0.82rem; color: var(--text-gray); }
+
+        /* APPLICATION FORM */
+        .application { background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-light)); color: var(--white); }
+        .application .section-title { color: var(--white); }
+        .application .section-subtitle { color: rgba(255,255,255,0.8); }
+        .form-container { max-width: 750px; margin: 0 auto; background: rgba(255,255,255,0.95); border-radius: var(--radius); padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); color: var(--text-dark); }
+        .form-step-indicator { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; }
+        .step-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--light-gray); transition: var(--transition); }
+        .step-dot.active { background: var(--gold); transform: scale(1.2); }
+        .step-dot.completed { background: var(--blue-accent); }
+        .form-step { display: none; animation: fadeIn 0.4s ease; }
+        .form-step.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .form-step h3 { font-size: 1.3rem; font-weight: 600; color: var(--primary-blue); margin-bottom: 5px; }
+        .form-step p { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.9rem; font-weight: 500; color: var(--text-dark); margin-bottom: 6px; }
+        .form-group label .required { color: #e74c3c; margin-left: 2px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 2px solid var(--light-gray); border-radius: var(--radius-sm); font-size: 0.95rem; font-family: inherit; transition: var(--transition); background: var(--white); color: var(--text-dark); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--blue-accent); box-shadow: 0 0 0 3px rgba(59,125,216,0.1); }
+        .form-group input.error, .form-group select.error, .form-group textarea.error { border-color: #e74c3c; }
+        .form-group .error-message { color: #e74c3c; font-size: 0.82rem; margin-top: 4px; display: none; }
+        .form-group .error-message.show { display: block; }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .file-upload-area { border: 2px dashed var(--light-gray); border-radius: var(--radius-sm); padding: 30px; text-align: center; cursor: pointer; transition: var(--transition); background: var(--off-white); }
+        .file-upload-area:hover { border-color: var(--blue-accent); background: rgba(59,125,216,0.05); }
+        .file-upload-area i { font-size: 2.5rem; color: var(--blue-accent); margin-bottom: 10px; }
+        .file-upload-area p { color: var(--text-gray); font-size: 0.9rem; }
+        .file-upload-area .file-types { font-size: 0.8rem; color: var(--text-light); margin-top: 5px; }
+        .file-upload-area.has-file { border-color: #27ae60; background: rgba(39,174,96,0.05); }
+        .file-name-display { display: none; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(39,174,96,0.1); border-radius: var(--radius-sm); color: #27ae60; font-size: 0.9rem; margin-top: 10px; }
+        .file-name-display.show { display: flex; }
+        .file-name-display i { font-size: 1.2rem; }
+        .file-name-display .remove-file { margin-left: auto; cursor: pointer; color: #e74c3c; }
+        .form-buttons { display: flex; gap: 15px; margin-top: 30px; justify-content: space-between; }
+        .form-buttons .btn { min-width: 140px; justify-content: center; }
+        .btn-prev { background: var(--light-gray); color: var(--text-dark); }
+        .btn-prev:hover { background: #d4d9e0; }
+
+        /* PASSPORT PREVIEW */
+        .passport-preview-container {
+            display: none; margin-top: 10px; position: relative;
+            width: 120px; height: 140px; border-radius: var(--radius-sm);
+            overflow: hidden; border: 3px solid var(--blue-accent);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .passport-preview-container img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .passport-preview-container .remove-preview {
+            position: absolute; top: -8px; right: -8px;
+            width: 24px; height: 24px; border-radius: 50%;
+            background: #e74c3c; color: white; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 0.8rem; cursor: pointer; border: 2px solid white;
+        }
+
+        /* DOCUMENTS PREVIEW */
+        .documents-preview-container {
+            display: none; flex-wrap: wrap; gap: 12px; margin-top: 10px;
+        }
+        .document-preview-item {
+            position: relative; width: 100px; height: 120px;
+            border-radius: var(--radius-sm); overflow: hidden;
+            border: 2px solid var(--light-gray); background: var(--off-white);
+        }
+        .document-preview-item img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .document-preview-item .doc-pdf-icon {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; height: 100%; padding: 8px;
+            font-size: 0.72rem; color: var(--text-gray); text-align: center;
+        }
+        .document-preview-item .doc-pdf-icon i {
+            font-size: 2rem; color: #e74c3c; margin-bottom: 5px;
+        }
+        .document-preview-item .remove-doc {
+            position: absolute; top: -6px; right: -6px;
+            width: 20px; height: 20px; border-radius: 50%;
+            background: #e74c3c; color: white; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 0.7rem; cursor: pointer; border: 2px solid white;
+        }
+
+        /* REVIEW SECTION */
+        .review-container {
+            animation: fadeIn 0.4s ease;
+        }
+        .review-header {
+            text-align: center; margin-bottom: 25px; padding-bottom: 20px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        .review-header h3 { font-size: 1.4rem; color: var(--primary-blue); }
+        .review-header h3 i { color: var(--gold); }
+        .review-header p { color: var(--text-gray); font-size: 0.9rem; margin-top: 5px; }
+        .review-body { display: flex; gap: 25px; margin-bottom: 25px; }
+        .review-photo-section {
+            flex-shrink: 0; text-align: center;
+        }
+        .review-photo {
+            width: 130px; height: 155px; border-radius: var(--radius-sm);
+            overflow: hidden; border: 3px solid var(--blue-accent);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .review-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .review-photo-label {
+            font-size: 0.78rem; color: var(--text-gray); margin-top: 8px;
+            font-weight: 500;
+        }
+        .review-details { flex: 1; min-width: 0; }
+        .review-section-title {
+            font-size: 1rem; font-weight: 600; color: var(--primary-blue);
+            margin-bottom: 8px; padding-bottom: 4px;
+            border-bottom: 2px solid var(--gold-light);
+        }
+        .review-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+        .review-table tr { border-bottom: 1px solid var(--light-gray); }
+        .review-table td { padding: 8px 5px; font-size: 0.88rem; vertical-align: top; }
+        .review-label { color: var(--text-gray); font-weight: 500; width: 140px; }
+        .review-value { color: var(--text-dark); }
+        .review-motivation {
+            background: var(--off-white); padding: 12px; border-radius: var(--radius-sm);
+            font-size: 0.88rem; color: var(--text-dark); font-style: italic; margin-top: 8px;
+        }
+        .review-documents-list { margin-top: 8px; }
+        .review-doc-item {
+            font-size: 0.85rem; color: var(--text-dark); margin-bottom: 5px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .review-footer {
+            display: flex; gap: 15px; justify-content: center;
+            padding-top: 20px; border-top: 2px solid var(--light-gray);
+        }
+        .review-footer .btn { min-width: 180px; justify-content: center; }
+
+        /* SUBMISSION SUCCESS */
+        .submission-success { display: none; text-align: center; padding: 40px 20px; }
+        .submission-success.show { display: block; animation: fadeIn 0.5s ease; }
+        .success-icon { width: 80px; height: 80px; border-radius: 50%; background: #27ae60; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; font-size: 2.5rem; color: white; animation: scaleIn 0.5s ease; }
+        @keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
+        .submission-success h2 { font-size: 1.6rem; color: var(--primary-blue); margin-bottom: 10px; }
+        .submission-success p { color: var(--text-gray); margin-bottom: 25px; }
+        .submission-success .success-actions { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+
+        /* CONTACT */
+        .contact { background: var(--white); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+        .contact-info h3 { font-size: 1.5rem; color: var(--primary-blue); margin-bottom: 20px; }
+        .contact-info p { color: var(--text-gray); margin-bottom: 25px; }
+        .contact-detail { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; }
+        .contact-detail i { width: 45px; height: 45px; border-radius: 50%; background: var(--off-white); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.2rem; flex-shrink: 0; }
+        .contact-detail h4 { font-size: 1rem; font-weight: 600; color: var(--primary-blue); margin-bottom: 3px; }
+        .contact-detail span { color: var(--text-gray); font-size: 0.9rem; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 12px 16px; border: 2px solid var(--light-gray); border-radius: var(--radius-sm); font-size: 0.95rem; font-family: inherit; transition: var(--transition); margin-bottom: 15px; }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--blue-accent); box-shadow: 0 0 0 3px rgba(59,125,216,0.1); }
+        .contact-form textarea { min-height: 120px; resize: vertical; }
+
+        /* SOCIAL */
+        .social-section { background: var(--primary-blue); color: var(--white); text-align: center; padding: 50px 20px; }
+        .social-section h2 { font-size: 1.8rem; margin-bottom: 10px; }
+        .social-section p { color: rgba(255,255,255,0.7); margin-bottom: 30px; }
+        .social-icons { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+        .social-icon { width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--white); transition: var(--transition); border: 2px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); }
+        .social-icon:hover { transform: translateY(-5px) scale(1.05); background: var(--gold); border-color: var(--gold); color: var(--primary-blue); }
+        .social-icon.whatsapp:hover { background: #25D366; border-color: #25D366; color: white; }
+        .social-icon.facebook:hover { background: #1877F2; border-color: #1877F2; color: white; }
+
+        /* FOOTER */
+        .footer { background: #0d244a; color: rgba(255,255,255,0.8); padding: 60px 0 0; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-col h3 { color: var(--white); font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; position: relative; padding-bottom: 10px; }
+        .footer-col h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background: var(--gold); }
+        .footer-col p { font-size: 0.9rem; line-height: 1.8; margin-bottom: 10px; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { font-size: 0.9rem; transition: var(--transition); color: rgba(255,255,255,0.7); }
+        .footer-col ul li a:hover { color: var(--gold); padding-left: 5px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 20px 0; margin-top: 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .footer-bottom p { font-size: 0.85rem; }
+        .footer-bottom .motto { color: var(--gold); font-weight: 600; font-style: italic; }
+
+        /* LOADING SCREEN */
+        .loading-screen {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--primary-blue);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .loading-screen.hidden {
+            opacity: 0; visibility: hidden; pointer-events: none;
+        }
+        .loading-logo {
+            width: 90px; height: 90px; border-radius: 16px;
+            overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            animation: loadingPulse 1.5s ease-in-out infinite;
+        }
+        .loading-logo img { width: 100%; height: 100%; object-fit: cover; }
+        .loading-name {
+            color: var(--white); font-size: 1.3rem; font-weight: 700;
+            margin-top: 20px; letter-spacing: 1px;
+        }
+        .loading-motto {
+            color: var(--gold-light); font-size: 0.85rem;
+            margin-top: 5px; font-style: italic; font-weight: 300;
+        }
+        .loading-bar-container {
+            margin-top: 30px; width: 200px; height: 3px;
+            background: rgba(255,255,255,0.2); border-radius: 3px;
+            overflow: hidden;
+        }
+        .loading-bar {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 3px;
+            animation: loadingProgress 1.8s ease-in-out forwards;
+        }
+        @keyframes loadingPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes loadingProgress {
+            0% { width: 0%; }
+            80% { width: 80%; }
+            100% { width: 100%; }
+        }
+
+        /* FLOATING WHATSAPP */
+        .floating-whatsapp { position: fixed; bottom: 25px; right: 25px; z-index: 999; width: 60px; height: 60px; border-radius: 50%; background: #25D366; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: var(--transition); cursor: pointer; animation: pulse 2s infinite; }
+        .floating-whatsapp:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(37,211,102,0.5); }
+        @keyframes pulse { 0% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 4px 30px rgba(37,211,102,0.6); } 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); } }
+
+        /* SCROLL ANIMATIONS */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 2.8rem; }
+            .about-grid { gap: 40px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: fixed; top: 70px; left: 0; right: 0; background: white; flex-direction: column; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); gap: 15px; }
+            .nav-links.open { display: flex; }
+            .hamburger { display: flex; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-features { grid-template-columns: 1fr; }
+            .campuses-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+            .section-title { font-size: 1.7rem; }
+            .form-container { padding: 25px 20px; }
+            .form-row { grid-template-columns: 1fr; }
+            .form-buttons { flex-direction: column; }
+            .form-buttons .btn { width: 100%; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .programs-grid { grid-template-columns: 1fr 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .review-body { flex-direction: column; align-items: center; }
+            .review-footer { flex-direction: column; align-items: center; }
+            .review-footer .btn { width: 100%; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.4rem; }
+            .programs-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .support-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .form-container { padding: 20px 15px; }
+            .nav-logo span { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">
+            <img src="images/LOGO.jpg" alt="Luso Technical College">
+        </div>
+        <div class="loading-name">Luso Technical College</div>
+        <div class="loading-motto">"Agency for Change"</div>
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <img src="images/LOGO.jpg" alt="Luso Technical College">
+                Luso Technical College <span>| Agency for Change</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="active">Home</a>
+                <a href="#about">About</a>
+                <a href="#programs">Programs</a>
+                <a href="#support">Support</a>
+                <a href="#campuses">Campuses</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#apply" class="nav-cta">Apply Now</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-motto">Agency for Change</div>
+            <h1>Practical Skills for Employment & Entrepreneurship</h1>
+            <p>Empowering Malawian youth through hands-on technical and vocational education.</p>
+            <div class="hero-buttons">
+                <a href="#apply" class="btn btn-primary"><i class="fas fa-graduation-cap"></i> Apply Now</a>
+                <a href="#contact" class="btn btn-outline"><i class="fas fa-phone-alt"></i> Contact Us</a>
+            </div>
+        </div>
+        <div class="hero-scroll"><i class="fas fa-chevron-down"></i></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about section-padding" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content fade-in">
+                    <h2>About Luso Technical College</h2>
+                    <p>Luso Technical College is a Malawian technical and vocational training institution with campuses in Lilongwe and Blantyre. We train students in practical, job-ready skills that prepare them for employment, self-reliance, and entrepreneurship.</p>
+                    <p>Our mission is to bridge the skills gap in Malawi by providing industry-relevant training that empowers youth to become productive members of society.</p>
+                    <div class="about-features">
+                        <div class="about-feature-item"><i class="fas fa-check-circle"></i> Practical Learning Environment</div>
+                        <div class="about-feature-item"><i class="fas fa-check-circle"></i> Industry-Relevant Skills</div>
+                        <div class="about-feature-item"><i class="fas fa-check-circle"></i> Student Empowerment</div>
+                        <div class="about-feature-item"><i class="fas fa-check-circle"></i> Entrepreneurship Mindset</div>
+                        <div class="about-feature-item"><i class="fas fa-check-circle"></i> Skilled Workforce Development</div>
+                        <div class="about-feature-item"><i class="fas fa-check-circle"></i> Affordable Quality Education</div>
+                    </div>
+                </div>
+                <div class="about-image fade-in">
+                    <img src="images/DIPLOMA PROGRAMS.jpg" alt="Luso Technical College Students">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRAMS -->
+    <section class="programs section-padding" id="programs">
+        <div class="container">
+            <h2 class="section-title">Our Programs</h2>
+            <p class="section-subtitle">Choose from our wide range of practical, career-oriented programs designed to give you job-ready skills.</p>
+            <div class="programs-grid">
+                <div class="program-card fade-in">
+                    <div class="program-card-image"><img src="images/ELECTRICAL INSTALLATION.jpg" alt="Electrical Installation" onerror="this.src='images/DIPLOMA PROGRAMS.jpg'"></div>
+                    <div class="program-card-content">
+                        <h3>Electrical Installation</h3>
+                        <p>Master the skills of electrical wiring, installation, and maintenance for residential and commercial applications.</p>
+                        <span class="program-tag">Certificate</span>
+                    </div>
+                </div>
+                <div class="program-card fade-in">
+                    <div class="program-card-image"><img src="images/PLUMBING.jpg" alt="Plumbing"></div>
+                    <div class="program-card-content">
+                        <h3>Plumbing</h3>
+                        <p>Learn modern plumbing techniques, pipe fitting, water supply systems, and sanitation infrastructure.</p>
+                        <span class="program-tag">Certificate</span>
+                    </div>
+                </div>
+                <div class="program-card fade-in">
+                    <div class="program-card-image"><img src="images/CARPENTRY AND JOINERY.jpg" alt="Carpentry & Joinery"></div>
+                    <div class="program-card-content">
+                        <h3>Carpentry & Joinery</h3>
+                        <p>Develop expertise in woodworking, furniture making, construction carpentry, and fine joinery.</p>
+                        <span class="program-tag">Certificate</span>
+                    </div>
+                </div>
+                <div class="program-card fade-in">
+                    <div class="program-card-image"><img src="images/HOTEL MANAGEMENT.jpg" alt="Hospitality"></div>
+                    <div class="program-card-content">
+                        <h3>Hospitality</h3>
+                        <p>Gain skills in hotel management, customer service, front office operations, and event management.</p>
+                        <span class="program-tag">Certificate</span>
+                    </div>
+                </div>
+                <div class="program-card fade-in">
+                    <div class="program-card-image"><img src="images/TAILORING.jpg" alt="Fashion & Design"></div>
+                    <div class="program-card-content">
+                        <h3>Fashion & Design</h3>
+                        <p>Learn garment construction, fashion design, pattern making, and textile art from industry experts.</p>
+                        <span class="program-tag">Certificate</span>
+                    </div>
+                </div>
+                <div class="program-card fade-in">
+                    <div class="program-card-image"><img src="images/DIPLOMA IN ICT.jpg" alt="ICT and Computer Use"></div>
+                    <div class="program-card-content">
+                        <h3>ICT and Computer Use</h3>
+                        <p>Build digital literacy, computer applications, programming basics, and IT support skills.</p>
+                        <span class="program-tag">Certificate</span>
+                    </div>
+                </div>
+                <div class="program-card fade-in">
+                    <div class="program-card-image"><img src="images/COSMETOLOGY.jpg" alt="Cosmetology & Beauty"></div>
+                    <div class="program-card-content">
+                        <h3>Cosmetology & Beauty</h3>
+                        <p>Study hair care, skincare, makeup artistry, salon management, and beauty therapy techniques.</p>
+                        <span class="program-tag">Certificate</span>
+                    </div>
+                </div>
+                <div class="program-card fade-in">
+                    <div class="program-card-image"><img src="images/FOOD NUTRION DIPLOMA.jpg" alt="Food Production"></div>
+                    <div class="program-card-content">
+                        <h3>Food Production</h3>
+                        <p>Learn commercial cooking, food safety, nutrition, kitchen management, and catering services.</p>
+                        <span class="program-tag">Certificate</span>
+                    </div>
+                </div>
+                <div class="program-card fade-in">
+                    <div class="program-card-image"><img src="images/MECHANICS.jpg" alt="Welding & Fabrication"></div>
+                    <div class="program-card-content">
+                        <h3>Welding & Fabrication</h3>
+                        <p>Master welding techniques, metal fabrication, structural work, and industrial manufacturing processes.</p>
+                        <span class="program-tag">Certificate</span>
+                    </div>
+                </div>
+                <div class="program-card fade-in">
+                    <div class="program-card-image"><img src="images/JUNE INTAKE.jpg" alt="Entrepreneurship"></div>
+                    <div class="program-card-content">
+                        <h3>Entrepreneurship Skills</h3>
+                        <p>Develop business acumen, financial literacy, marketing skills, and learn how to start and grow a business.</p>
+                        <span class="program-tag">Certificate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section class="support section-padding" id="support">
+        <div class="container">
+            <h2 class="section-title">Student Support</h2>
+            <p class="section-subtitle">We provide comprehensive support to ensure every student succeeds in their educational journey.</p>
+            <div class="support-grid">
+                <div class="support-card fade-in">
+                    <div class="support-icon"><i class="fas fa-compass"></i></div>
+                    <h3>Career Guidance</h3>
+                    <p>Professional career counseling to help you choose the right path and plan your future.</p>
+                </div>
+                <div class="support-card fade-in">
+                    <div class="support-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Practical Training Support</h3>
+                    <p>Well-equipped workshops and modern tools to enhance your hands-on learning experience.</p>
+                </div>
+                <div class="support-card fade-in">
+                    <div class="support-icon"><i class="fas fa-users"></i></div>
+                    <h3>Student Mentorship</h3>
+                    <p>One-on-one mentorship from experienced instructors who guide you throughout your studies.</p>
+                </div>
+                <div class="support-card fade-in">
+                    <div class="support-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Entrepreneurship Development</h3>
+                    <p>Special programs to help you start your own business and become self-reliant after graduation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAMPUSES -->
+    <section class="campuses section-padding" id="campuses">
+        <div class="container">
+            <h2 class="section-title">Our Campuses</h2>
+            <p class="section-subtitle">Conveniently located in Malawi's two major cities to serve you better.</p>
+            <div class="campuses-grid">
+                <div class="campus-card fade-in">
+                    <h3><i class="fas fa-map-marker-alt"></i> Lilongwe Campus</h3>
+                    <p><i class="fas fa-building"></i> Behind NBS Bank, European Business Centre Building</p>
+                    <p><i class="fas fa-city"></i> Lilongwe, Malawi</p>
+                    <p><i class="fas fa-phone"></i> +265 995 545 449</p>
+                </div>
+                <div class="campus-card fade-in">
+                    <h3><i class="fas fa-map-marker-alt"></i> Blantyre Campus</h3>
+                    <p><i class="fas fa-building"></i> Yanakis Along Masauko Chipembere Highway, City Plaza Building, Floor Number 3</p>
+                    <p><i class="fas fa-city"></i> Blantyre, Malawi</p>
+                    <p><i class="fas fa-phone"></i> +265 995 545 449</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="why-choose section-padding" id="why-choose">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us</h2>
+            <p class="section-subtitle">Luso Technical College stands out as a premier institution for technical and vocational education in Malawi.</p>
+            <div class="why-grid">
+                <div class="why-card fade-in"><div class="why-number">01</div><h3>Practical Hands-On Training</h3><p>Learn by doing with our state-of-the-art workshops and real-world projects.</p></div>
+                <div class="why-card fade-in"><div class="why-number">02</div><h3>Experienced Instructors</h3><p>Learn from industry professionals with years of practical experience.</p></div>
+                <div class="why-card fade-in"><div class="why-number">03</div><h3>Entrepreneurship-Focused</h3><p>We don't just train employees; we create job creators and business owners.</p></div>
+                <div class="why-card fade-in"><div class="why-number">04</div><h3>Affordable Education</h3><p>Quality technical education at fees that are accessible to Malawian families.</p></div>
+                <div class="why-card fade-in"><div class="why-number">05</div><h3>Career-Oriented Programs</h3><p>Every program is designed with the job market in mind for direct employment.</p></div>
+                <div class="why-card fade-in"><div class="why-number">06</div><h3>Supportive Environment</h3><p>A nurturing atmosphere where every student is valued and guided to succeed.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery section-padding" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+            <p class="section-subtitle">See our students, workshops, and campus life in action.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in"><img src="images/DIPLOMA PROGRAMS.jpg" alt="Students"><div class="gallery-overlay"><span>Students in Practical Training</span></div></div>
+                <div class="gallery-item fade-in"><img src="images/MECHANICS.jpg" alt="Workshop"><div class="gallery-overlay"><span>Mechanics Workshop</span></div></div>
+                <div class="gallery-item fade-in"><img src="images/CARPENTRY AND JOINERY.jpg" alt="Carpentry"><div class="gallery-overlay"><span>Carpentry & Joinery Class</span></div></div>
+                <div class="gallery-item fade-in"><img src="images/HOTEL MANAGEMENT.jpg" alt="Hospitality"><div class="gallery-overlay"><span>Hospitality Training</span></div></div>
+                <div class="gallery-item fade-in"><img src="images/COSMETOLOGY.jpg" alt="Cosmetology"><div class="gallery-overlay"><span>Cosmetology & Beauty Class</span></div></div>
+                <div class="gallery-item fade-in"><img src="images/TAILORING.jpg" alt="Fashion"><div class="gallery-overlay"><span>Fashion & Design Workshop</span></div></div>
+                <div class="gallery-item fade-in"><img src="images/FOOD NUTRION DIPLOMA.jpg" alt="Food"><div class="gallery-overlay"><span>Food Production Class</span></div></div>
+                <div class="gallery-item fade-in"><img src="images/DIPLOMA IN ICT.jpg" alt="ICT"><div class="gallery-overlay"><span>ICT Computer Lab</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials section-padding" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Student Testimonials</h2>
+            <p class="section-subtitle">Hear from our graduates about how Luso Technical College transformed their lives.</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <p>"Luso Technical College gave me the practical skills I needed to start my own electrical installation business. Within three months of graduating, I had my first major contract."</p>
+                    <div class="testimonial-author"><div class="testimonial-avatar">MC</div><div class="testimonial-info"><h4>Moses Chibwe</h4><span>Electrical Installation Graduate | Entrepreneur</span></div></div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <p>"The hospitality training at Luso was hands-on from day one. I secured a job at a top hotel in Lilongwe immediately after completing my certificate. The practical approach made all the difference."</p>
+                    <div class="testimonial-author"><div class="testimonial-avatar">GK</div><div class="testimonial-info"><h4>Grace Kamwendo</h4><span>Hospitality Graduate | Hotel Supervisor</span></div></div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <p>"I joined the fashion and design program with no prior experience. The instructors were patient and skilled. Today I run my own tailoring shop and employ three other young people."</p>
+                    <div class="testimonial-author"><div class="testimonial-avatar">TB</div><div class="testimonial-info"><h4>Thandiwe Banda</h4><span>Fashion & Design Graduate | Business Owner</span></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPLICATION FORM -->
+    <section class="application section-padding" id="apply">
+        <div class="container">
+            <h2 class="section-title">Apply Now</h2>
+            <p class="section-subtitle">Ready to transform your future? Complete the application form below and take the first step toward a brighter career.</p>
+            <div class="form-container" id="formContainer">
+                <div class="form-step-indicator" id="stepIndicator">
+                    <div class="step-dot active" data-step="1"></div>
+                    <div class="step-dot" data-step="2"></div>
+                    <div class="step-dot" data-step="3"></div>
+                    <div class="step-dot" data-step="4"></div>
+                </div>
+
+                <!-- Step 1: Personal Information -->
+                <div class="form-step active" data-step="1">
+                    <h3>Personal Information</h3>
+                    <p>Please provide your personal details so we can get to know you.</p>
+                    <div class="form-group">
+                        <label for="fullName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                        <div class="error-message" id="fullNameError">Please enter your full name.</div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dob">Date of Birth <span class="required">*</span></label>
+                            <input type="date" id="dob" name="dob" required>
+                            <div class="error-message" id="dobError">Please select your date of birth.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender <span class="required">*</span></label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div class="error-message" id="genderError">Please select your gender.</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number (WhatsApp preferred) <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" placeholder="+265 XXX XXX XXX" required>
+                            <div class="error-message" id="phoneError">Please enter a valid phone number.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                            <div class="error-message" id="emailError">Please enter a valid email address.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Home Address <span class="required">*</span></label>
+                        <input type="text" id="address" name="address" placeholder="Enter your home address" required>
+                        <div class="error-message" id="addressError">Please enter your home address.</div>
+                    </div>
+                    <div class="form-buttons">
+                        <div></div>
+                        <button type="button" class="btn btn-blue" onclick="nextStep(1)">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Course Selection -->
+                <div class="form-step" data-step="2">
+                    <h3>Course Selection</h3>
+                    <p>Choose the program you want to study at Luso Technical College.</p>
+                    <div class="form-group">
+                        <label for="course">Select Course <span class="required">*</span></label>
+                        <select id="course" name="course" required>
+                            <option value="">-- Select a program --</option>
+                            <option value="Electrical Installation">Electrical Installation</option>
+                            <option value="Plumbing">Plumbing</option>
+                            <option value="Carpentry & Joinery">Carpentry & Joinery</option>
+                            <option value="Hospitality">Hospitality</option>
+                            <option value="Fashion & Design">Fashion & Design</option>
+                            <option value="ICT and Computer Use">ICT and Computer Use</option>
+                            <option value="Cosmetology & Beauty">Cosmetology & Beauty</option>
+                            <option value="Food Production">Food Production</option>
+                            <option value="Welding & Fabrication">Welding & Fabrication</option>
+                            <option value="Entrepreneurship Skills">Entrepreneurship Skills</option>
+                        </select>
+                        <div class="error-message" id="courseError">Please select a course.</div>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-prev" onclick="prevStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button type="button" class="btn btn-blue" onclick="nextStep(2)">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Education Background & Motivation -->
+                <div class="form-step" data-step="3">
+                    <h3>Education & Motivation</h3>
+                    <p>Tell us about your background and why you want to join Luso Technical College.</p>
+                    <div class="form-group">
+                        <label for="qualification">Highest Qualification <span class="required">*</span></label>
+                        <select id="qualification" name="qualification" required>
+                            <option value="">Select qualification</option>
+                            <option value="MSCE">MSCE (Malawi School Certificate of Education)</option>
+                            <option value="JCE">JCE (Junior Certificate of Education)</option>
+                            <option value="PSLCE">PSLCE (Primary School Leaving Certificate)</option>
+                            <option value="Diploma">Diploma</option>
+                            <option value="Degree">Degree</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="error-message" id="qualificationError">Please select your highest qualification.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="school">School Attended <span class="required">*</span></label>
+                        <input type="text" id="school" name="school" placeholder="Enter name of school you attended" required>
+                        <div class="error-message" id="schoolError">Please enter the school you attended.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="motivation">Why do you want to join Luso Technical College? <span class="required">*</span></label>
+                        <textarea id="motivation" name="motivation" placeholder="Share your reasons for wanting to study at Luso Technical College..." required></textarea>
+                        <div class="error-message" id="motivationError">Please tell us why you want to join.</div>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-prev" onclick="prevStep(3)"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button type="button" class="btn btn-blue" onclick="nextStep(3)">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Upload & Submit -->
+                <div class="form-step" data-step="4">
+                    <h3>Upload Documents</h3>
+                    <p>Please upload your passport photo and any supporting documents (optional).</p>
+                    <div class="form-group">
+                        <label>Upload Passport Photo <span class="required">*</span></label>
+                        <div class="file-upload-area" id="passportUpload" onclick="document.getElementById('passportInput').click()">
+                            <i class="fas fa-camera"></i>
+                            <p>Click to upload your passport photo</p>
+                            <p class="file-types">JPG, PNG • Max 2MB</p>
+                        </div>
+                        <input type="file" id="passportInput" accept=".jpg,.jpeg,.png" style="display:none" onchange="handleFileUpload('passport')">
+
+                        <!-- Passport Preview (shown at top-left of application in review) -->
+                        <div class="passport-preview-container" id="passportPreviewContainer">
+                            <img id="passportPreview" src="" alt="Passport Photo">
+                            <span class="remove-preview" onclick="removeFile('passport')"><i class="fas fa-times"></i></span>
+                        </div>
+
+                        <div class="file-name-display" id="passportFileName">
+                            <i class="fas fa-check-circle"></i>
+                            <span id="passportFileNameText"></span>
+                            <span class="remove-file" onclick="removeFile('passport')"><i class="fas fa-times"></i></span>
+                        </div>
+                        <div class="error-message" id="passportError">Please upload your passport photo.</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Academic Certificates & ID (Optional)</label>
+                        <div class="file-upload-area" id="documentsUpload" onclick="document.getElementById('documentsInput').click()">
+                            <i class="fas fa-file-upload"></i>
+                            <p>Click to upload certificates or ID</p>
+                            <p class="file-types">National ID, Academic Certificates • JPG, PNG, PDF</p>
+                        </div>
+                        <input type="file" id="documentsInput" accept=".jpg,.jpeg,.png,.pdf" multiple style="display:none" onchange="handleFileUpload('documents')">
+
+                        <!-- Document Previews -->
+                        <div class="documents-preview-container" id="documentsPreviewContainer"></div>
+
+                        <div class="file-name-display" id="documentsFileName">
+                            <i class="fas fa-check-circle"></i>
+                            <span id="documentsFileNameText"></span>
+                            <span class="remove-file" onclick="removeFile('documents')"><i class="fas fa-times"></i></span>
+                        </div>
+                    </div>
+                    <p style="font-size:0.85rem;color:var(--text-light);margin:20px 0;padding:12px;background:var(--off-white);border-radius:8px;">
+                        <i class="fas fa-info-circle" style="color:var(--blue-accent);"></i> By submitting this application, you agree to our terms and conditions. Your data will be handled securely.
+                    </p>
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-prev" onclick="prevStep(4)"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button type="button" class="btn btn-primary" onclick="submitApplication()">
+                            <i class="fas fa-paper-plane"></i> Submit Application
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Submission Success -->
+                <div class="submission-success" id="submissionSuccess">
+                    <div class="success-icon"><i class="fas fa-check"></i></div>
+                    <h2><i class="fas fa-check-circle" style="color:#27ae60;"></i> Application Submitted Successfully!</h2>
+                    <p>Your application has been received by Luso Technical College. Our admissions team will review your details and contact you within 2-3 business days.</p>
+                    <div class="success-actions">
+                        <a href="https://wa.me/265995545449" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp Follow-up</a>
+                        <a href="#home" class="btn btn-outline" style="border-color:var(--primary-blue);color:var(--primary-blue);"><i class="fas fa-home"></i> Back to Home</a>
+                    </div>
+                    <p style="margin-top:15px;font-size:0.85rem;color:var(--text-light);">
+                        <i class="fas fa-envelope"></i> Please check your email for a confirmation message from us.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact section-padding" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-subtitle">We'd love to hear from you. Get in touch with us for any inquiries or assistance.</p>
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h3>Get In Touch</h3>
+                    <p>Have a question about our programs, admissions, or anything else? Reach out to us and our team will be happy to help.</p>
+                    <div class="contact-detail"><i class="fab fa-whatsapp"></i><div><h4>WhatsApp</h4><span>+265 995 545 449</span></div></div>
+                    <div class="contact-detail"><i class="fas fa-envelope"></i><div><h4>Email</h4><span>lusomalawi2023@gmail.com</span></div></div>
+                    <div class="contact-detail"><i class="fas fa-map-marker-alt"></i><div><h4>Lilongwe Campus</h4><span>Behind NBS Bank, European Business Centre Building</span></div></div>
+                    <div class="contact-detail"><i class="fas fa-map-marker-alt"></i><div><h4>Blantyre Campus</h4><span>Yanakis Along Masauko Chipembere Highway, City Plaza Building, Floor 3</span></div></div>
+                    <a href="https://wa.me/265995545449" target="_blank" class="btn btn-whatsapp" style="margin-top:15px;"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+                </div>
+                <div class="contact-form fade-in">
+                    <form id="contactForm" onsubmit="sendContactMessage(event)">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="text" placeholder="Subject">
+                        <textarea placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn btn-blue" style="width:100%;justify-content:center;"><i class="fas fa-paper-plane"></i> Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL MEDIA -->
+    <section class="social-section">
+        <div class="container">
+            <h2>Visit Our Social Media Pages</h2>
+            <p>Follow us on social media for updates, events, and inspiring stories from our students.</p>
+            <div class="social-icons">
+                <a href="https://wa.me/265995545449" target="_blank" class="social-icon whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100091452948509" target="_blank" class="social-icon facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Luso Technical College</h3>
+                    <p>Empowering Malawian youth through hands-on technical and vocational education. We train students in practical, job-ready skills that prepare them for employment, self-reliance, and entrepreneurship.</p>
+                    <p style="margin-top:10px;"><strong>Motto:</strong> <span style="color:var(--gold);font-style:italic;">"Agency for Change"</span></p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#apply">Apply Now</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Campuses</h3>
+                    <ul>
+                        <li><a href="#campuses">Lilongwe Campus</a></li>
+                        <li><a href="#campuses">Blantyre Campus</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="https://wa.me/265995545449">WhatsApp: +265 995 545 449</a></li>
+                        <li><a href="mailto:lusomalawi2023@gmail.com">lusomalawi2023@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Luso Technical College. All rights reserved.</p>
+                <p class="motto">"Agency for Change"</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/265995545449" target="_blank" class="floating-whatsapp" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Loading screen - hide after page loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Force scroll to top on every page load and refresh
+        window.scrollTo(0, 0);
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('beforeunload', function() {
+            window.scrollTo(0, 0);
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('open'); });
+        document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navLinks.classList.remove('open'); }); });
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+            let current = '';
+            document.querySelectorAll('section[id]').forEach(section => {
+                if (window.scrollY >= section.offsetTop - 150) current = section.getAttribute('id');
+            });
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Form state
+        let currentStep = 1;
+        let formData = {};
+        let passportFile = null;
+        let documentsFiles = [];
+
+        function updateStepIndicator() {
+            document.querySelectorAll('.step-dot').forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index + 1 === currentStep) dot.classList.add('active');
+                else if (index + 1 < currentStep) dot.classList.add('completed');
+            });
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+            document.querySelector(`.form-step[data-step="${step}"]`).classList.add('active');
+            updateStepIndicator();
+        }
+
+        function validateStep(step) {
+            let valid = true;
+            document.querySelectorAll('.error-message').forEach(el => el.classList.remove('show'));
+            document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(el => el.classList.remove('error'));
+
+            if (step === 1) {
+                const fullName = document.getElementById('fullName').value.trim();
+                const dob = document.getElementById('dob').value;
+                const gender = document.getElementById('gender').value;
+                const phone = document.getElementById('phone').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const address = document.getElementById('address').value.trim();
+                if (!fullName) { showError('fullName','fullNameError'); valid=false; }
+                if (!dob) { showError('dob','dobError'); valid=false; }
+                if (!gender) { showError('gender','genderError'); valid=false; }
+                if (!phone) { showError('phone','phoneError'); valid=false; }
+                if (!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email','emailError'); valid=false; }
+                if (!address) { showError('address','addressError'); valid=false; }
+                if (valid) { formData.fullName=fullName; formData.dob=dob; formData.gender=gender; formData.phone=phone; formData.email=email; formData.address=address; }
+            } else if (step === 2) {
+                const course = document.getElementById('course').value;
+                if (!course) { showError('course','courseError'); valid=false; }
+                if (valid) formData.course = course;
+            } else if (step === 3) {
+                const qualification = document.getElementById('qualification').value;
+                const school = document.getElementById('school').value.trim();
+                const motivation = document.getElementById('motivation').value.trim();
+                if (!qualification) { showError('qualification','qualificationError'); valid=false; }
+                if (!school) { showError('school','schoolError'); valid=false; }
+                if (!motivation) { showError('motivation','motivationError'); valid=false; }
+                if (valid) { formData.qualification=qualification; formData.school=school; formData.motivation=motivation; }
+            } else if (step === 4) {
+                if (!passportFile) { showError('passport','passportError'); valid=false; }
+            }
+            return valid;
+        }
+
+        function showError(inputId, errorId) {
+            const input = document.getElementById(inputId);
+            const error = document.getElementById(errorId);
+            if (input) input.classList.add('error');
+            if (error) error.classList.add('show');
+        }
+
+        function nextStep(step) { if (validateStep(step)) { currentStep = step + 1; showStep(currentStep); } }
+        function prevStep(step) { currentStep = step - 1; showStep(currentStep); }
+
+        // ===== FILE UPLOAD WITH PREVIEWS =====
+        function handleFileUpload(type) {
+            if (type === 'passport') {
+                const input = document.getElementById('passportInput');
+                if (input.files && input.files[0]) {
+                    const file = input.files[0];
+                    if (file.size > 2 * 1024 * 1024) { alert('File size must be less than 2MB.'); input.value = ''; return; }
+                    passportFile = file;
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('passportPreview').src = e.target.result;
+                        document.getElementById('passportPreviewContainer').style.display = 'block';
+                        document.getElementById('passportUpload').style.display = 'none';
+                        document.getElementById('passportFileName').classList.add('show');
+                        document.getElementById('passportFileNameText').textContent = file.name;
+                    };
+                    reader.readAsDataURL(file);
+                    document.getElementById('passportError').classList.remove('show');
+                }
+            } else if (type === 'documents') {
+                const input = document.getElementById('documentsInput');
+                if (input.files && input.files.length > 0) {
+                    documentsFiles = Array.from(input.files);
+                    document.getElementById('documentsUpload').style.display = 'none';
+                    document.getElementById('documentsFileName').classList.add('show');
+                    document.getElementById('documentsFileNameText').textContent = documentsFiles.length + ' file(s) selected';
+                    const container = document.getElementById('documentsPreviewContainer');
+                    container.innerHTML = '';
+                    container.style.display = 'flex';
+                    documentsFiles.forEach((file, index) => {
+                        const isPDF = file.type === 'application/pdf' || file.name.endsWith('.pdf');
+                        const div = document.createElement('div');
+                        div.className = 'document-preview-item';
+                        if (isPDF) {
+                            div.innerHTML = `<div class="doc-pdf-icon"><i class="fas fa-file-pdf"></i><span>${file.name}</span></div>`;
+                        } else {
+                            const imgReader = new FileReader();
+                            imgReader.onload = function(ev) { div.innerHTML = `<img src="${ev.target.result}" alt="${file.name}"><span style="font-size:0.7rem;position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);color:white;padding:2px 5px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${file.name}</span>`; };
+                            imgReader.readAsDataURL(file);
+                        }
+                        const removeBtn = document.createElement('span');
+                        removeBtn.className = 'remove-doc';
+                        removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                        removeBtn.onclick = function() { removeFile('documents'); };
+                        div.appendChild(removeBtn);
+                        container.appendChild(div);
+                    });
+                }
+            }
+        }
+
+        function removeFile(type) {
+            if (type === 'passport') {
+                passportFile = null;
+                document.getElementById('passportInput').value = '';
+                document.getElementById('passportUpload').style.display = 'block';
+                document.getElementById('passportPreviewContainer').style.display = 'none';
+                document.getElementById('passportPreview').src = '';
+                document.getElementById('passportFileName').classList.remove('show');
+            } else if (type === 'documents') {
+                documentsFiles = [];
+                document.getElementById('documentsInput').value = '';
+                document.getElementById('documentsUpload').style.display = 'block';
+                document.getElementById('documentsPreviewContainer').style.display = 'none';
+                document.getElementById('documentsPreviewContainer').innerHTML = '';
+                document.getElementById('documentsFileName').classList.remove('show');
+            }
+        }
+
+        // ===== PROFESSIONAL REVIEW BEFORE SUBMIT =====
+        function showApplicationReview() {
+            if (!validateStep(4)) return;
+
+            formData.course = document.getElementById('course').value;
+            formData.qualification = document.getElementById('qualification').value;
+            formData.school = document.getElementById('school').value.trim();
+            formData.motivation = document.getElementById('motivation').value.trim();
+
+            const passportSrc = document.getElementById('passportPreview').src || '';
+
+            let docsHTML = '<div class="review-doc-item"><i class="fas fa-check-circle" style="color:#27ae60;"></i> Passport Photo: ' + (passportFile ? passportFile.name : 'None') + '</div>';
+            if (documentsFiles.length > 0) {
+                docsHTML += '<div class="review-doc-item"><i class="fas fa-check-circle" style="color:#27ae60;"></i> Supporting Documents: ' + documentsFiles.map(f => f.name).join(', ') + '</div>';
+            } else {
+                docsHTML += '<div class="review-doc-item"><i class="fas fa-info-circle" style="color:#f5a623;"></i> No supporting documents uploaded</div>';
+            }
+
+            const reviewHTML = `
+                <div class="review-container">
+                    <div class="review-header">
+                        <h3><i class="fas fa-clipboard-check"></i> Review Your Application</h3>
+                        <p>Please verify all details before submitting your application.</p>
+                    </div>
+                    <div class="review-body">
+                        <div class="review-photo-section">
+                            <div class="review-photo">
+                                <img src="${passportSrc}" alt="Passport Photo" id="reviewPassportImg">
+                            </div>
+                            <div class="review-photo-label">Passport Photo</div>
+                        </div>
+                        <div class="review-details">
+                            <div class="review-section-title">Personal Information</div>
+                            <table class="review-table">
+                                <tr><td class="review-label">Full Name</td><td class="review-value">${formData.fullName}</td></tr>
+                                <tr><td class="review-label">Date of Birth</td><td class="review-value">${formData.dob}</td></tr>
+                                <tr><td class="review-label">Gender</td><td class="review-value">${formData.gender}</td></tr>
+                                <tr><td class="review-label">Phone</td><td class="review-value">${formData.phone}</td></tr>
+                                <tr><td class="review-label">Email</td><td class="review-value">${formData.email}</td></tr>
+                                <tr><td class="review-label">Address</td><td class="review-value">${formData.address}</td></tr>
+                            </table>
+                            <div class="review-section-title" style="margin-top:20px;">Course Selection</div>
+                            <table class="review-table">
+                                <tr><td class="review-label">Selected Course</td><td class="review-value"><strong>${formData.course}</strong></td></tr>
+                            </table>
+                            <div class="review-section-title" style="margin-top:20px;">Education Background</div>
+                            <table class="review-table">
+                                <tr><td class="review-label">Highest Qualification</td><td class="review-value">${formData.qualification}</td></tr>
+                                <tr><td class="review-label">School Attended</td><td class="review-value">${formData.school}</td></tr>
+                            </table>
+                            <div class="review-section-title" style="margin-top:20px;">Motivation</div>
+                            <div class="review-motivation">${formData.motivation}</div>
+                            <div class="review-section-title" style="margin-top:20px;">Uploaded Documents</div>
+                            <div class="review-documents-list">${docsHTML}</div>
+                        </div>
+                    </div>
+                    <div class="review-footer">
+                        <button type="button" class="btn btn-prev" onclick="closeReview()"><i class="fas fa-arrow-left"></i> Edit Application</button>
+                        <button type="button" class="btn btn-primary" onclick="confirmSubmit()"><i class="fas fa-paper-plane"></i> Confirm & Submit</button>
+                    </div>
+                </div>
+            `;
+
+            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('stepIndicator').style.display = 'none';
+
+            const formContainer = document.getElementById('formContainer');
+            const existingReview = formContainer.querySelector('.review-container');
+            if (existingReview) existingReview.closest('.form-step').remove();
+
+            const reviewDiv = document.createElement('div');
+            reviewDiv.className = 'form-step active';
+            reviewDiv.style.animation = 'fadeIn 0.4s ease';
+            reviewDiv.innerHTML = reviewHTML;
+            formContainer.insertBefore(reviewDiv, document.getElementById('submissionSuccess'));
+        }
+
+        function closeReview() {
+            const review = document.querySelector('.review-container');
+            if (review) review.closest('.form-step').remove();
+            document.getElementById('stepIndicator').style.display = 'flex';
+            showStep(4);
+        }
+
+        // ===== GENERATE PROFESSIONAL PDF APPLICATION =====
+        function generatePDF(callback) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'mm', 'a4');
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const margin = 20;
+            const contentWidth = pageWidth - 2 * margin;
+            let yPos = margin;
+
+            // Colors
+            const primaryBlue = [26, 58, 107];
+            const gold = [245, 166, 35];
+            const lightGray = [200, 200, 200];
+
+            // Helper functions
+            function addSectionTitle(text, y) {
+                doc.setFontSize(14);
+                doc.setFont(undefined, 'bold');
+                doc.setTextColor(primaryBlue[0], primaryBlue[1], primaryBlue[2]);
+                doc.text(text, margin, y);
+                doc.setDrawColor(gold[0], gold[1], gold[2]);
+                doc.setLineWidth(0.8);
+                doc.line(margin, y + 1.5, margin + 60, y + 1.5);
+                return y + 8;
+            }
+
+            function addField(label, value, y) {
+                doc.setFontSize(10);
+                doc.setFont(undefined, 'bold');
+                doc.setTextColor(100, 100, 100);
+                doc.text(label, margin, y);
+                doc.setFont(undefined, 'normal');
+                doc.setTextColor(50, 50, 50);
+                const valX = margin + 55;
+                doc.text(value || '-', valX, y);
+                doc.setDrawColor(lightGray[0], lightGray[1], lightGray[2]);
+                doc.setLineWidth(0.2);
+                doc.line(margin, y + 1.5, margin + contentWidth, y + 1.5);
+                return y + 7;
+            }
+
+            function addWrappedText(text, y, size, color, fontStyle) {
+                doc.setFontSize(size || 10);
+                doc.setFont(undefined, fontStyle || 'normal');
+                doc.setTextColor(color ? color[0] : 50, color ? color[1] : 50, color ? color[2] : 50);
+                const lines = doc.splitTextToSize(text, contentWidth);
+                doc.text(lines, margin, y);
+                return y + (lines.length * (size + 1 || 11));
+            }
+
+            // === HEADER ===
+            // Blue header background
+            doc.setFillColor(primaryBlue[0], primaryBlue[1], primaryBlue[2]);
+            doc.rect(0, 0, pageWidth, 42, 'F');
+
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(20);
+            doc.setFont(undefined, 'bold');
+            doc.text('LUSO TECHNICAL COLLEGE', pageWidth / 2, 18, { align: 'center' });
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text('Official Application Form', pageWidth / 2, 28, { align: 'center' });
+            doc.setFontSize(8);
+            doc.setTextColor(gold[0], gold[1], gold[2]);
+            doc.text('"Agency for Change"', pageWidth / 2, 36, { align: 'center' });
+
+            yPos = 52;
+
+            // Application number and date
+            doc.setFontSize(8);
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(100, 100, 100);
+            const appRef = 'APP-' + Date.now().toString(36).toUpperCase();
+            doc.text('Application Ref: ' + appRef, margin, yPos);
+            doc.text('Date: ' + new Date().toLocaleDateString('en-MW', { weekday:'long', year:'numeric', month:'long', day:'numeric' }), pageWidth - margin, yPos, { align: 'right' });
+
+            yPos += 12;
+
+            // === SECTION 1: PERSONAL INFORMATION ===
+            yPos = addSectionTitle('1. Personal Information', yPos);
+
+            const fields1 = [
+                ['Full Name:', formData.fullName],
+                ['Date of Birth:', formData.dob],
+                ['Gender:', formData.gender],
+                ['Phone (WhatsApp):', formData.phone],
+                ['Email:', formData.email],
+                ['Home Address:', formData.address]
+            ];
+            fields1.forEach(f => { yPos = addField(f[0], f[1], yPos); });
+
+            yPos += 5;
+
+            // === SECTION 2: COURSE SELECTION ===
+            yPos = addSectionTitle('2. Course Selection', yPos);
+            yPos = addField('Selected Program:', formData.course, yPos);
+
+            yPos += 5;
+
+            // === SECTION 3: EDUCATION BACKGROUND ===
+            yPos = addSectionTitle('3. Education Background', yPos);
+            const fields3 = [
+                ['Highest Qualification:', formData.qualification],
+                ['School Attended:', formData.school]
+            ];
+            fields3.forEach(f => { yPos = addField(f[0], f[1], yPos); });
+
+            yPos += 5;
+
+            // === SECTION 4: MOTIVATION ===
+            yPos = addSectionTitle('4. Motivation', yPos);
+            yPos = addWrappedText('"' + formData.motivation + '"', yPos, 9.5, [80, 80, 80], 'italic');
+
+            yPos += 8;
+
+            // === SECTION 5: UPLOADED DOCUMENTS ===
+            yPos = addSectionTitle('5. Uploaded Documents', yPos);
+
+            // Passport photo on the right side
+            const passportImg = document.getElementById('passportPreview');
+            if (passportImg && passportImg.src && passportImg.src.length > 100) {
+                try {
+                    // Add passport photo in the top-right corner area
+                    doc.addImage(passportImg.src, 'JPEG', pageWidth - margin - 35, 52, 30, 36);
+                    // Border around it
+                    doc.setDrawColor(primaryBlue[0], primaryBlue[1], primaryBlue[2]);
+                    doc.setLineWidth(0.5);
+                    doc.rect(pageWidth - margin - 35, 52, 30, 36);
+                    doc.setFontSize(6);
+                    doc.setTextColor(100, 100, 100);
+                    doc.text('Passport Photo', pageWidth - margin - 20, 90, { align: 'center' });
+                } catch(e) {
+                    // Fallback if image fails
+                }
+            }
+
+            // List uploaded images as embedded in PDF
+            let docY = yPos;
+            if (passportFile) {
+                doc.setFontSize(9);
+                doc.setFont(undefined, 'normal');
+                doc.setTextColor(50, 50, 50);
+                doc.text('✓ Passport Photo: ' + passportFile.name, margin, docY);
+                docY += 5;
+            }
+
+            // Add certificate images into the PDF
+            if (documentsFiles.length > 0) {
+                documentsFiles.forEach((file, index) => {
+                    doc.setFontSize(9);
+                    doc.setFont(undefined, 'normal');
+                    doc.setTextColor(50, 50, 50);
+                    const isPDF = file.type === 'application/pdf' || file.name.endsWith('.pdf');
+                    doc.text('✓ ' + (isPDF ? 'Certificate (PDF): ' : 'Certificate Image: ') + file.name, margin, docY);
+                    docY += 5;
+
+                    // If it's an image, embed it directly in the PDF
+                    if (!isPDF) {
+                        const imgElement = document.querySelector('.document-preview-item img');
+                        if (imgElement && imgElement.src) {
+                            try {
+                                const certY = docY + 2;
+                                if (certY + 40 < pageHeight - margin) {
+                                    doc.addImage(imgElement.src, 'JPEG', margin, certY, contentWidth * 0.6, 35);
+                                    doc.setDrawColor(lightGray[0], lightGray[1], lightGray[2]);
+                                    doc.setLineWidth(0.3);
+                                    doc.rect(margin, certY, contentWidth * 0.6, 35);
+                                    doc.setFontSize(7);
+                                    doc.setTextColor(100, 100, 100);
+                                    doc.text(file.name, margin, certY + 38);
+                                    docY = certY + 42;
+                                }
+                            } catch(e) {}
+                        }
+                    } else {
+                        // For PDFs, note that PDF is attached separately
+                        doc.setFontSize(7);
+                        doc.setFont(undefined, 'italic');
+                        doc.setTextColor(150, 150, 150);
+                        doc.text('(PDF document - attached separately to this email)', margin + 5, docY);
+                        docY += 4;
+                    }
+                });
+            } else {
+                doc.setFontSize(9);
+                doc.setFont(undefined, 'normal');
+                doc.setTextColor(150, 150, 150);
+                doc.text('No supporting documents uploaded', margin, docY);
+                docY += 5;
+            }
+
+            yPos = Math.max(yPos, docY) + 10;
+
+            // === FOOTER ===
+            // Check if we need a new page
+            if (yPos > pageHeight - 30) {
+                doc.addPage();
+                yPos = margin;
+            }
+
+            // Footer line
+            doc.setDrawColor(gold[0], gold[1], gold[2]);
+            doc.setLineWidth(0.5);
+            doc.line(margin, yPos, pageWidth - margin, yPos);
+            yPos += 6;
+
+            doc.setFontSize(7);
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(100, 100, 100);
+            doc.text('Luso Technical College | Lilongwe & Blantyre Campuses | +265 995 545 449', pageWidth / 2, yPos, { align: 'center' });
+            yPos += 4;
+            doc.setTextColor(150, 150, 150);
+            doc.text('This application was submitted via the Luso Technical College website.', pageWidth / 2, yPos, { align: 'center' });
+
+            // Add college stamp/watermark
+            doc.setFontSize(40);
+            doc.setTextColor(230, 230, 230);
+            doc.setFont(undefined, 'bold');
+            doc.text('LTC', pageWidth / 2, pageHeight - 25, { align: 'center' });
+
+            // Get PDF as data URI
+            const pdfDataUri = doc.output('datauristring');
+            callback(pdfDataUri, appRef);
+        }
+
+        // ===== SUBMIT APPLICATION =====
+        function submitApplication() {
+            if (!validateStep(4)) return;
+            showApplicationReview();
+        }
+
+        async function confirmSubmit() {
+            const submitBtn = document.querySelector('.review-footer .btn-primary');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating Application...';
+            submitBtn.disabled = true;
+
+            try {
+                formData.course = document.getElementById('course').value;
+                formData.qualification = document.getElementById('qualification').value;
+                formData.school = document.getElementById('school').value.trim();
+                formData.motivation = document.getElementById('motivation').value.trim();
+
+                // Generate professional PDF application
+                generatePDF(async function(pdfDataUri, appRef) {
+                    try {
+                        // Create a hidden download link to save the PDF
+                        const link = document.createElement('a');
+                        link.href = pdfDataUri;
+                        link.download = `Luso_Application_${formData.fullName.replace(/\s+/g, '_')}_${appRef}.pdf`;
+                        document.body.appendChild(link);
+                        
+                        // Build complete WhatsApp message with ALL application details as text
+                        const fullDetails =
+                            `*📋 NEW APPLICATION - LUSO TECHNICAL COLLEGE*\n` +
+                            `==================================\n` +
+                            `*Ref:* ${appRef}\n` +
+                            `*Date:* ${new Date().toLocaleDateString('en-MW')}\n\n` +
+                            `*👤 PERSONAL INFORMATION*\n` +
+                            `*Name:* ${formData.fullName}\n` +
+                            `*DOB:* ${formData.dob}\n` +
+                            `*Gender:* ${formData.gender}\n` +
+                            `*Phone:* ${formData.phone}\n` +
+                            `*Email:* ${formData.email}\n` +
+                            `*Address:* ${formData.address}\n\n` +
+                            `*📚 COURSE*\n` +
+                            `*Program:* ${formData.course}\n\n` +
+                            `*🎓 EDUCATION*\n` +
+                            `*Qualification:* ${formData.qualification}\n` +
+                            `*School:* ${formData.school}\n\n` +
+                            `*💭 MOTIVATION*\n` +
+                            `${formData.motivation}\n\n` +
+                            `*📎 ATTACHMENTS*\n` +
+                            `*Passport:* ${passportFile ? passportFile.name : 'N/A'}\n` +
+                            `*Documents:* ${documentsFiles.length > 0 ? documentsFiles.map(f => f.name).join(', ') : 'None'}\n\n` +
+                            `_✅ PDF application form is attached below._\n` +
+                            `_Please download and save the PDF for records._`;
+
+                        // 1. Open WhatsApp with ALL application details + instruction to download PDF
+                        const waMsg = encodeURIComponent(fullDetails);
+                        
+                        // Try to use WhatsApp Web URL that supports document sharing
+                        // First open WhatsApp with text
+                        const waWindow = window.open(`https://wa.me/265995545449?text=${waMsg}`, '_blank');
+                        
+                        // Trigger PDF download for the user to manually share to WhatsApp
+                        setTimeout(() => {
+                            link.click();
+                            document.body.removeChild(link);
+                        }, 1000);
+
+                        // 2. Also send professional email as backup with all details
+                        const emailSubject = encodeURIComponent(`Application - ${formData.fullName} - ${formData.course} [${appRef}]`);
+                        const emailBody = encodeURIComponent(
+                            `LUSO TECHNICAL COLLEGE - OFFICIAL APPLICATION FORM\n` +
+                            `====================================================\n\n` +
+                            `Reference: ${appRef}\n` +
+                            `Date: ${new Date().toLocaleDateString('en-MW', { weekday:'long', year:'numeric', month:'long', day:'numeric' })}\n\n` +
+                            `--- PERSONAL INFORMATION ---\n` +
+                            `Full Name: ${formData.fullName}\n` +
+                            `Date of Birth: ${formData.dob}\n` +
+                            `Gender: ${formData.gender}\n` +
+                            `Phone (WhatsApp): ${formData.phone}\n` +
+                            `Email: ${formData.email}\n` +
+                            `Home Address: ${formData.address}\n\n` +
+                            `--- COURSE SELECTED ---\n` +
+                            `Program of Study: ${formData.course}\n\n` +
+                            `--- EDUCATION BACKGROUND ---\n` +
+                            `Highest Qualification: ${formData.qualification}\n` +
+                            `School Attended: ${formData.school}\n\n` +
+                            `--- MOTIVATION ---\n` +
+                            `${formData.motivation}\n\n` +
+                            `--- ATTACHMENTS ---\n` +
+                            `Passport Photo: ${passportFile ? passportFile.name + ' (attached as image)' : 'Not provided'}\n` +
+                            (documentsFiles.length > 0 ? `Supporting Documents: ${documentsFiles.map(f => f.name).join(', ')}\n` : '') +
+                            `\nThe full PDF application has been downloaded and sent via WhatsApp.\n` +
+                            `====================================================\n` +
+                            `Submitted via Luso Technical College website.`
+                        );
+
+                        // Open email as backup
+                        window.location.href = `mailto:lusomalawi2023@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+
+                        // Show success message
+                        setTimeout(() => {
+                            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+                            document.getElementById('submissionSuccess').classList.add('show');
+                        }, 2000);
+
+                    } catch (err) {
+                        alert('There was an error submitting your application. Please contact us on WhatsApp at +265 995 545 449');
+                        if (submitBtn) { submitBtn.innerHTML = originalText; submitBtn.disabled = false; }
+                    }
+                });
+
+            } catch (error) {
+                alert('There was an error generating your application. Please try again or contact us on WhatsApp at +265 995 545 449');
+                if (submitBtn) { submitBtn.innerHTML = originalText; submitBtn.disabled = false; }
+            }
+        }
+
+        // ===== CONTACT FORM =====
+        function sendContactMessage(event) {
+            event.preventDefault();
+            const form = event.target;
+            const name = form.querySelector('input[placeholder="Your Name"]').value.trim();
+            const email = form.querySelector('input[placeholder="Your Email"]').value.trim();
+            const subject = form.querySelector('input[placeholder="Subject"]').value.trim();
+            const message = form.querySelector('textarea').value.trim();
+            const fullMsg = encodeURIComponent(`*Contact Form - Luso Technical College*%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Subject:* ${subject||'General Inquiry'}%0A%0A*Message:*%0A${message}`);
+            window.open(`https://wa.me/265995545449?text=${fullMsg}`, '_blank');
+            form.reset();
+            alert('Your message has been sent! We will respond to you shortly.');
+        }
+
+        // Hero scroll
+        document.querySelector('.hero-scroll')?.addEventListener('click', () => {
+            document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
