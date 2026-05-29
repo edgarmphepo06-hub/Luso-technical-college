@@ -14,8 +14,6 @@
     <link rel="icon" href="LOGO.jpg" type="image/jpeg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
             --primary-blue: #1a3a6b;
@@ -113,26 +111,117 @@
 
         /* HERO */
         .hero {
-            min-height: 100vh;
-            background: linear-gradient(135deg, rgba(26,58,107,0.7), rgba(42,82,152,0.65)), url('HOME.jpg') center/cover no-repeat fixed;
-            display: flex; align-items: center; justify-content: center; text-align: center;
-            color: var(--white); padding: 100px 20px 60px; position: relative; overflow: hidden;
+            min-height: 92vh;
+            background: linear-gradient(135deg, #16284f 0%, #2a5298 100%);
+            display: flex; align-items: center; justify-content: center;
+            padding: 100px 20px 80px; position: relative; overflow: hidden;
+            color: var(--white);
         }
-        .hero-content { max-width: 850px; position: relative; z-index: 2; }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(245,166,35,0.14), transparent 32%),
+                        radial-gradient(circle at bottom right, rgba(255,255,255,0.1), transparent 28%);
+            pointer-events: none;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-content {
+            text-align: left;
+        }
         .hero-motto {
-            display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(5px);
-            padding: 8px 24px; border-radius: 50px; font-size: 0.9rem; font-weight: 500;
-            letter-spacing: 3px; text-transform: uppercase; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.2);
+            display: inline-flex;
+            background: rgba(255,255,255,0.12);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.18);
+            color: var(--white);
         }
         .hero h1 {
-            font-size: 3.5rem; font-weight: 800; line-height: 1.15; margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--white), var(--gold-light));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            font-size: 3.3rem;
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            color: var(--white);
+            text-shadow: 0 15px 30px rgba(0,0,0,0.18);
+            background: none;
+            -webkit-text-fill-color: initial;
         }
-        .hero p { font-size: 1.2rem; color: rgba(255,255,255,0.9); margin-bottom: 15px; font-weight: 300; }
-        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 35px; }
-        .hero-scroll { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite; color: rgba(255,255,255,0.7); font-size: 1.5rem; cursor: pointer; }
-        @keyframes bounce { 0%,20%,50%,80%,100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-15px); } 60% { transform: translateX(-50%) translateY(-8px); } }
+        .hero p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 25px;
+            max-width: 680px;
+            font-weight: 300;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin-top: 25px;
+        }
+        .hero-image-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: 0 24px 70px rgba(0,0,0,0.16);
+            backdrop-filter: blur(8px);
+        }
+        .hero-image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            min-height: 430px;
+        }
+        .hero-image-caption {
+            padding: 24px;
+            color: rgba(255,255,255,0.88);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            background: rgba(0,0,0,0.08);
+        }
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 30px;
+        }
+        .hero-stat {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 18px;
+            padding: 16px 18px;
+            min-width: 145px;
+            text-align: center;
+        }
+        .hero-stat strong {
+            display: block;
+            font-size: 1.45rem;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+        .hero-stat span {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.78);
+        }
+        .hero-scroll { display: none; }
 
         /* ABOUT */
         .about { background: var(--white); }
@@ -267,85 +356,6 @@
             font-size: 0.8rem; cursor: pointer; border: 2px solid white;
         }
 
-        /* DOCUMENTS PREVIEW */
-        .documents-preview-container {
-            display: none; flex-wrap: wrap; gap: 12px; margin-top: 10px;
-        }
-        .document-preview-item {
-            position: relative; width: 100px; height: 120px;
-            border-radius: var(--radius-sm); overflow: hidden;
-            border: 2px solid var(--light-gray); background: var(--off-white);
-        }
-        .document-preview-item img {
-            width: 100%; height: 100%; object-fit: cover;
-        }
-        .document-preview-item .doc-pdf-icon {
-            display: flex; flex-direction: column; align-items: center;
-            justify-content: center; height: 100%; padding: 8px;
-            font-size: 0.72rem; color: var(--text-gray); text-align: center;
-        }
-        .document-preview-item .doc-pdf-icon i {
-            font-size: 2rem; color: #e74c3c; margin-bottom: 5px;
-        }
-        .document-preview-item .remove-doc {
-            position: absolute; top: -6px; right: -6px;
-            width: 20px; height: 20px; border-radius: 50%;
-            background: #e74c3c; color: white; display: flex;
-            align-items: center; justify-content: center;
-            font-size: 0.7rem; cursor: pointer; border: 2px solid white;
-        }
-
-        /* REVIEW SECTION */
-        .review-container {
-            animation: fadeIn 0.4s ease;
-        }
-        .review-header {
-            text-align: center; margin-bottom: 25px; padding-bottom: 20px;
-            border-bottom: 2px solid var(--light-gray);
-        }
-        .review-header h3 { font-size: 1.4rem; color: var(--primary-blue); }
-        .review-header h3 i { color: var(--gold); }
-        .review-header p { color: var(--text-gray); font-size: 0.9rem; margin-top: 5px; }
-        .review-body { display: flex; gap: 25px; margin-bottom: 25px; }
-        .review-photo-section {
-            flex-shrink: 0; text-align: center;
-        }
-        .review-photo {
-            width: 130px; height: 155px; border-radius: var(--radius-sm);
-            overflow: hidden; border: 3px solid var(--blue-accent);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-        }
-        .review-photo img { width: 100%; height: 100%; object-fit: cover; }
-        .review-photo-label {
-            font-size: 0.78rem; color: var(--text-gray); margin-top: 8px;
-            font-weight: 500;
-        }
-        .review-details { flex: 1; min-width: 0; }
-        .review-section-title {
-            font-size: 1rem; font-weight: 600; color: var(--primary-blue);
-            margin-bottom: 8px; padding-bottom: 4px;
-            border-bottom: 2px solid var(--gold-light);
-        }
-        .review-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-        .review-table tr { border-bottom: 1px solid var(--light-gray); }
-        .review-table td { padding: 8px 5px; font-size: 0.88rem; vertical-align: top; }
-        .review-label { color: var(--text-gray); font-weight: 500; width: 140px; }
-        .review-value { color: var(--text-dark); }
-        .review-motivation {
-            background: var(--off-white); padding: 12px; border-radius: var(--radius-sm);
-            font-size: 0.88rem; color: var(--text-dark); font-style: italic; margin-top: 8px;
-        }
-        .review-documents-list { margin-top: 8px; }
-        .review-doc-item {
-            font-size: 0.85rem; color: var(--text-dark); margin-bottom: 5px;
-            display: flex; align-items: center; gap: 8px;
-        }
-        .review-footer {
-            display: flex; gap: 15px; justify-content: center;
-            padding-top: 20px; border-top: 2px solid var(--light-gray);
-        }
-        .review-footer .btn { min-width: 180px; justify-content: center; }
-
         /* SUBMISSION SUCCESS */
         .submission-success { display: none; text-align: center; padding: 40px 20px; }
         .submission-success.show { display: block; animation: fadeIn 0.5s ease; }
@@ -385,8 +395,8 @@
         .footer-col h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background: var(--gold); }
         .footer-col p { font-size: 0.9rem; line-height: 1.8; margin-bottom: 10px; }
         .footer-col ul li { margin-bottom: 10px; }
-        .footer-col ul li a { font-size: 0.9rem; transition: var(--transition); color: rgba(255,255,255,0.7); }
-        .footer-col ul li a:hover { color: var(--gold); padding-left: 5px; }
+        .footer-col ul li a { font-size: 0.9rem; transition: color 0.25s ease; color: rgba(255,255,255,0.7); }
+        .footer-col ul li a:hover { color: var(--gold); }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 20px 0; margin-top: 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
         .footer-bottom p { font-size: 0.85rem; }
         .footer-bottom .motto { color: var(--gold); font-weight: 600; font-style: italic; }
@@ -449,7 +459,9 @@
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr 1fr; }
             .hero h1 { font-size: 2.8rem; }
+            .hero-image-card img { min-height: 360px; }
             .about-grid { gap: 40px; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
         }
@@ -457,8 +469,12 @@
             .nav-links { display: none; position: fixed; top: 70px; left: 0; right: 0; background: white; flex-direction: column; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); gap: 15px; }
             .nav-links.open { display: flex; }
             .hamburger { display: flex; }
-            .hero h1 { font-size: 2.2rem; }
+            .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+            .hero-content { text-align: center; }
+            .hero h1 { font-size: 2.4rem; }
             .hero p { font-size: 1rem; }
+            .hero-image-card img { min-height: 320px; }
+            .hero-stats { justify-content: center; }
             .about-grid { grid-template-columns: 1fr; }
             .about-features { grid-template-columns: 1fr; }
             .campuses-grid { grid-template-columns: 1fr; }
@@ -473,12 +489,14 @@
             .programs-grid { grid-template-columns: 1fr 1fr; }
             .gallery-grid { grid-template-columns: 1fr 1fr; }
             .footer-bottom { flex-direction: column; text-align: center; }
-            .review-body { flex-direction: column; align-items: center; }
             .review-footer { flex-direction: column; align-items: center; }
             .review-footer .btn { width: 100%; }
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 1.8rem; }
+            .hero-image-card img { min-height: 260px; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { flex-direction: column; gap: 12px; }
             .section-title { font-size: 1.4rem; }
             .programs-grid { grid-template-columns: 1fr; }
             .gallery-grid { grid-template-columns: 1fr; }
@@ -527,16 +545,27 @@
 
     <!-- HERO -->
     <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-motto">Agency for Change</div>
-            <h1>Practical Skills for Employment & Entrepreneurship</h1>
-            <p>Empowering Malawian youth through hands-on technical and vocational education.</p>
-            <div class="hero-buttons">
-                <a href="#apply" class="btn btn-primary"><i class="fas fa-graduation-cap"></i> Apply Now</a>
-                <a href="#contact" class="btn btn-outline"><i class="fas fa-phone-alt"></i> Contact Us</a>
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="hero-motto">Agency for Change</div>
+                <h1>Practical Skills for Employment & Entrepreneurship</h1>
+                <p>Empowering Malawian youth through hands-on technical and vocational education.</p>
+                <div class="hero-buttons">
+                    <button type="button" class="btn btn-blue" onclick="downloadFilledForm()"><i class="fas fa-download"></i> Download Form</button>
+                    <button type="button" class="btn btn-whatsapp" onclick="sendApplicationToWhatsApp()"><i class="fab fa-whatsapp"></i> WhatsApp Us</button>
+                    <button type="button" class="btn btn-primary" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})"><i class="fas fa-paper-plane"></i> Apply Now</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat"><strong>14</strong><span>Hands-on Programs</span></div>
+                    <div class="hero-stat"><strong>2</strong><span>Campuses in Malawi</span></div>
+                    <div class="hero-stat"><strong>100%</strong><span>Job-focus Training</span></div>
+                </div>
+            </div>
+            <div class="hero-image-card fade-in">
+                <img src="DIPLOMA.jpg" alt="Students learning at Luso Technical College">
+                <div class="hero-image-caption">Discover real workshop experience, practical classes, and campus life designed for modern learners.</div>
             </div>
         </div>
-        <div class="hero-scroll"><i class="fas fa-chevron-down"></i></div>
     </section>
 
     <!-- ABOUT -->
@@ -557,7 +586,7 @@
                     </div>
                 </div>
                 <div class="about-image fade-in">
-                    <img src="DIPLOMA PROGRAMS.jpg" alt="Luso Technical College Students">
+                    <img src="DIPLOMA.jpg" alt="Luso Technical College Students">
                 </div>
             </div>
         </div>
@@ -570,7 +599,7 @@
             <p class="section-subtitle">Choose from our wide range of practical, career-oriented programs designed to give you job-ready skills.</p>
             <div class="programs-grid">
                 <div class="program-card fade-in">
-                    <div class="program-card-image"><img src="ELECTRICAL INSTALLATION.jpg" alt="Electrical Installation" onerror="this.src='DIPLOMA PROGRAMS.jpg'"></div>
+                    <div class="program-card-image"><img src="CHOICES.jpg" alt="Electrical Installation" onerror="this.src='DIPLOMA.jpg'"></div>
                     <div class="program-card-content">
                         <h3>Electrical Installation</h3>
                         <p>Master the skills of electrical wiring, installation, and maintenance for residential and commercial applications.</p>
@@ -578,7 +607,7 @@
                     </div>
                 </div>
                 <div class="program-card fade-in">
-                    <div class="program-card-image"><img src="PLUMBING.jpg" alt="Plumbing"></div>
+                    <div class="program-card-image"><img src="PUMBING.jpg" alt="Plumbing"></div>
                     <div class="program-card-content">
                         <h3>Plumbing</h3>
                         <p>Learn modern plumbing techniques, pipe fitting, water supply systems, and sanitation infrastructure.</p>
@@ -610,7 +639,7 @@
                     </div>
                 </div>
                 <div class="program-card fade-in">
-                    <div class="program-card-image"><img src="DIPLOMA IN ICT.jpg" alt="ICT and Computer Use"></div>
+                    <div class="program-card-image"><img src="ICT AND COMPUTER USE.jpg" alt="ICT and Computer Use"></div>
                     <div class="program-card-content">
                         <h3>ICT and Computer Use</h3>
                         <p>Build digital literacy, computer applications, programming basics, and IT support skills.</p>
@@ -626,7 +655,7 @@
                     </div>
                 </div>
                 <div class="program-card fade-in">
-                    <div class="program-card-image"><img src="FOOD NUTRION DIPLOMA.jpg" alt="Food Production"></div>
+                    <div class="program-card-image"><img src="DIPLOMA IN FOOD PRODUCTION.jpg" alt="Food Production"></div>
                     <div class="program-card-content">
                         <h3>Food Production</h3>
                         <p>Learn commercial cooking, food safety, nutrition, kitchen management, and catering services.</p>
@@ -634,7 +663,7 @@
                     </div>
                 </div>
                 <div class="program-card fade-in">
-                    <div class="program-card-image"><img src="MECHANICS.jpg" alt="Auto Mobile Mechanics"></div>
+                    <div class="program-card-image"><img src="AUTOMOBILE MECHANICS.jpg" alt="Auto Mobile Mechanics"></div>
                     <div class="program-card-content">
                         <h3>Auto Mobile Mechanics</h3>
                         <p>Learn automotive repair, engine diagnostics, vehicle maintenance, and mechanical systems troubleshooting.</p>
@@ -642,13 +671,119 @@
                     </div>
                 </div>
                 <div class="program-card fade-in">
-                    <div class="program-card-image"><img src="JUNE INTAKE.jpg" alt="Entrepreneurship"></div>
+                    <div class="program-card-image"><img src="CHOICES.jpg" alt="Entrepreneurship"></div>
                     <div class="program-card-content">
                         <h3>Entrepreneurship Skills</h3>
                         <p>Develop business acumen, financial literacy, marketing skills, and learn how to start and grow a business.</p>
                         <span class="program-tag">Certificate</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COURSE PRICING & DETAILS -->
+    <section class="section-padding" id="pricing" style="background: var(--white); border-top: 1px solid var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Course Pricing & Details</h2>
+            <p class="section-subtitle">Affordable quality education with flexible payment options. Registration fee is K10,000 (non-refundable).</p>
+            
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: var(--primary-blue); font-size: 1.3rem; margin-bottom: 15px;"><i class="fas fa-hourglass-half" style="color: var(--gold);"></i> 2-Month Informal Courses – K150,000</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid var(--gold); border-radius: 4px;">
+                        <strong>ICT Computer Use</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid var(--gold); border-radius: 4px;">
+                        <strong>Tailoring & Fashion Design</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid var(--gold); border-radius: 4px;">
+                        <strong>Electrical & Solar Installation</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid var(--gold); border-radius: 4px;">
+                        <strong>Video Production</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid var(--gold); border-radius: 4px;">
+                        <strong>Electronics Repairing</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid var(--gold); border-radius: 4px;">
+                        <strong>Computer Repairing</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid var(--gold); border-radius: 4px;">
+                        <strong>Graphic Designing</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid var(--gold); border-radius: 4px;">
+                        <strong>Audio Production</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid var(--gold); border-radius: 4px;">
+                        <strong>Phone Repairing</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: var(--primary-blue); font-size: 1.3rem; margin-bottom: 15px;"><i class="fas fa-calendar" style="color: var(--gold);"></i> 3-Month Courses – K250,000 per term</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #3b7dd8; border-radius: 4px;">
+                        <strong>Cosmetology (Makeup, Nails, Hair)</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #3b7dd8; border-radius: 4px;">
+                        <strong>Hospitality/Hotel Management</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #3b7dd8; border-radius: 4px;">
+                        <strong>Plumbing</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #3b7dd8; border-radius: 4px;">
+                        <strong>Welding & Fabrication</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #3b7dd8; border-radius: 4px;">
+                        <strong>Automobile Mechanics</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #3b7dd8; border-radius: 4px;">
+                        <strong>Aircon & Refrigeration</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: var(--primary-blue); font-size: 1.3rem; margin-bottom: 15px;"><i class="fas fa-graduation-cap" style="color: var(--gold);"></i> Diploma Courses – K250,000 per semester</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #1a3a6b; border-radius: 4px;">
+                        <strong>Business Administration</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #1a3a6b; border-radius: 4px;">
+                        <strong>Journalism (ABMA)</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #1a3a6b; border-radius: 4px;">
+                        <strong>Secretarial (ABMA)</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #1a3a6b; border-radius: 4px;">
+                        <strong>Human Resource (ABE)</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #1a3a6b; border-radius: 4px;">
+                        <strong>Public Health (ABMA)</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #1a3a6b; border-radius: 4px;">
+                        <strong>Electrical Engineering (City & Guilds)</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #1a3a6b; border-radius: 4px;">
+                        <strong>Food & Nutrition (ABMA)</strong>
+                    </div>
+                    <div style="padding: 10px; background: var(--off-white); border-left: 4px solid #1a3a6b; border-radius: 4px;">
+                        <strong>Community Development (ABMA)</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, rgba(26,58,107,0.05), rgba(245,166,35,0.05)); padding: 25px; border-radius: var(--radius); border-left: 5px solid var(--gold);">
+                <h4 style="color: var(--primary-blue); margin-bottom: 12px;"><i class="fas fa-info-circle" style="color: var(--gold);"></i> Important Information</h4>
+                <ul style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.8; margin-left: 20px;">
+                    <li><strong>Registration Fee:</strong> K10,000 (Non-refundable) - for all courses</li>
+                    <li><strong>Payment Accounts:</strong> National Bank, Account No: 1010530535</li>
+                    <li><strong>Exam Boards:</strong> ICM, BMEC, ABE, City & Guilds, TEVETA</li>
+                    <li><strong>Payment Plans:</strong> Flexible payment arrangements available upon request</li>
+                    <li><strong>Contact for Details:</strong> +265 995 545 449 | lusomalawi2023@gmail.com</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -727,14 +862,14 @@
             <h2 class="section-title">Gallery</h2>
             <p class="section-subtitle">See our students, workshops, and campus life in action.</p>
             <div class="gallery-grid">
-                <div class="gallery-item fade-in"><img src="DIPLOMA PROGRAMS.jpg" alt="Students"><div class="gallery-overlay"><span>Students in Practical Training</span></div></div>
-                <div class="gallery-item fade-in"><img src="MECHANICS.jpg" alt="Workshop"><div class="gallery-overlay"><span>Mechanics Workshop</span></div></div>
+                <div class="gallery-item fade-in"><img src="DIPLOMA.jpg" alt="Students"><div class="gallery-overlay"><span>Students in Practical Training</span></div></div>
+                <div class="gallery-item fade-in"><img src="AUTOMOBILE MECHANICS.jpg" alt="Workshop"><div class="gallery-overlay"><span>Mechanics Workshop</span></div></div>
                 <div class="gallery-item fade-in"><img src="CARPENTRY AND JOINERY.jpg" alt="Carpentry"><div class="gallery-overlay"><span>Carpentry & Joinery Class</span></div></div>
                 <div class="gallery-item fade-in"><img src="HOTEL MANAGEMENT.jpg" alt="Hospitality"><div class="gallery-overlay"><span>Hospitality Training</span></div></div>
                 <div class="gallery-item fade-in"><img src="COSMETOLOGY.jpg" alt="Cosmetology"><div class="gallery-overlay"><span>Cosmetology & Beauty Class</span></div></div>
                 <div class="gallery-item fade-in"><img src="TAILORING.jpg" alt="Fashion"><div class="gallery-overlay"><span>Fashion & Design Workshop</span></div></div>
-                <div class="gallery-item fade-in"><img src="FOOD NUTRION DIPLOMA.jpg" alt="Food"><div class="gallery-overlay"><span>Food Production Class</span></div></div>
-                <div class="gallery-item fade-in"><img src="DIPLOMA IN ICT.jpg" alt="ICT"><div class="gallery-overlay"><span>ICT Computer Lab</span></div></div>
+                <div class="gallery-item fade-in"><img src="DIPLOMA IN FOOD PRODUCTION.jpg" alt="Food"><div class="gallery-overlay"><span>Food Production Class</span></div></div>
+                <div class="gallery-item fade-in"><img src="ICT AND COMPUTER USE.jpg" alt="ICT"><div class="gallery-overlay"><span>ICT Computer Lab</span></div></div>
             </div>
         </div>
     </section>
@@ -826,23 +961,46 @@
                 <!-- Step 2: Course Selection -->
                 <div class="form-step" data-step="2">
                     <h3>Course Selection</h3>
-                    <p>Choose the program you want to study at Luso Technical College.</p>
+                    <p>Choose the program you want to study at Luso Technical College. See pricing below.</p>
                     <div class="form-group">
                         <label for="course">Select Course <span class="required">*</span></label>
                         <select id="course" name="course" required>
                             <option value="">-- Select a program --</option>
-                            <option value="Electrical Installation">Electrical Installation</option>
-                            <option value="Plumbing">Plumbing</option>
-                            <option value="Carpentry & Joinery">Carpentry & Joinery</option>
-                            <option value="Hospitality">Hospitality</option>
-                            <option value="Fashion & Design">Fashion & Design</option>
-                            <option value="ICT and Computer Use">ICT and Computer Use</option>
-                            <option value="Cosmetology & Beauty">Cosmetology & Beauty</option>
-                            <option value="Food Production">Food Production</option>
-                            <option value="Welding & Fabrication">Welding & Fabrication</option>
-                            <option value="Entrepreneurship Skills">Entrepreneurship Skills</option>
+                            <optgroup label="2-Month Informal Courses - K150,000">
+                                <option value="ICT Computer Use - K150,000">ICT Computer Use</option>
+                                <option value="Tailoring & Fashion Design - K150,000">Tailoring & Fashion Design</option>
+                                <option value="Electrical and Solar Installation - K150,000">Electrical and Solar Installation</option>
+                                <option value="Video Production - K150,000">Video Production</option>
+                                <option value="Electronics Repairing - K150,000">Electronics Repairing</option>
+                                <option value="Computer Repairing - K150,000">Computer Repairing</option>
+                                <option value="Graphic Designing - K150,000">Graphic Designing</option>
+                                <option value="Audio Production - K150,000">Audio Production</option>
+                                <option value="Phone Repairing - K150,000">Phone Repairing</option>
+                            </optgroup>
+                            <optgroup label="3-Month Courses - K250,000 per term">
+                                <option value="Cosmetology (Makeup, Nails, Hair) - K250,000">Cosmetology (Makeup, Nails, Hair)</option>
+                                <option value="Hospitality/Hotel Management (Catering) - K250,000">Hospitality/Hotel Management (Catering) - ICM</option>
+                                <option value="Plumbing - K250,000">Plumbing</option>
+                                <option value="Welding and Fabrication - K250,000">Welding and Fabrication</option>
+                                <option value="Automobile Mechanics - K250,000">Automobile Mechanics</option>
+                                <option value="Aircon & Refrigeration - K250,000">Aircon & Refrigeration</option>
+                            </optgroup>
+                            <optgroup label="Diploma Courses - K250,000 per semester">
+                                <option value="Business Administration - K250,000">Business Administration</option>
+                                <option value="Journalism - ABMA - K250,000">Journalism - ABMA</option>
+                                <option value="Secretarial - ABMA - K250,000">Secretarial - ABMA</option>
+                                <option value="Human Resource - ABE - K250,000">Human Resource - ABE</option>
+                                <option value="Public Health - ABMA - K250,000">Public Health - ABMA</option>
+                                <option value="Electrical Engineering - City & Guilds - K250,000">Electrical Engineering - City & Guilds</option>
+                                <option value="Food & Nutrition - ABMA - K250,000">Food & Nutrition - ABMA</option>
+                                <option value="Community Development - ABMA - K250,000">Community Development - ABMA</option>
+                            </optgroup>
                         </select>
                         <div class="error-message" id="courseError">Please select a course.</div>
+                    </div>
+                    <div style="background: var(--off-white); padding: 15px; border-radius: var(--radius-sm); margin-bottom: 20px; font-size: 0.9rem; color: var(--text-gray);">
+                        <strong>Registration Fee:</strong> K10,000 (Non-refundable)<br>
+                        <strong>Note:</strong> Price includes course fees. Payment plan available upon request.
                     </div>
                     <div class="form-buttons">
                         <button type="button" class="btn btn-prev" onclick="prevStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
@@ -856,15 +1014,11 @@
                     <p>Tell us about your background and why you want to join Luso Technical College.</p>
                     <div class="form-group">
                         <label for="qualification">Highest Qualification <span class="required">*</span></label>
-                        <select id="qualification" name="qualification" required>
-                            <option value="">Select qualification</option>
-                            <option value="MSCE">MSCE (Malawi School Certificate of Education)</option>
-                            <option value="JCE">JCE (Junior Certificate of Education)</option>
-                            <option value="PSLCE">PSLCE (Primary School Leaving Certificate)</option>
-                            <option value="Diploma">Diploma</option>
-                            <option value="Degree">Degree</option>
-                            <option value="Other">Other</option>
-                        </select>
+                            <select id="qualification" name="qualification" required>
+                                <option value="">Select qualification</option>
+                                <option value="MSCE">MSCE (Malawi School Certificate of Education)</option>
+                                <option value="Other">Other</option>
+                            </select>
                         <div class="error-message" id="qualificationError">Please select your highest qualification.</div>
                     </div>
                     <div class="form-group">
@@ -883,25 +1037,22 @@
                     </div>
                 </div>
 
-                <!-- Step 4: Upload & Submit -->
+                <!-- Step 4: Upload Photo & Submit -->
                 <div class="form-step" data-step="4">
-                    <h3>Upload Documents</h3>
-                    <p>Please upload your passport photo and any supporting documents (optional).</p>
+                    <h3>Upload Your Photo</h3>
+                    <p>Please upload your passport photo. It will appear on your downloaded application form.</p>
                     <div class="form-group">
                         <label>Upload Passport Photo <span class="required">*</span></label>
                         <div class="file-upload-area" id="passportUpload" onclick="document.getElementById('passportInput').click()">
                             <i class="fas fa-camera"></i>
                             <p>Click to upload your passport photo</p>
-                            <p class="file-types">JPG, PNG â€¢ Max 2MB</p>
+                            <p class="file-types">JPG, PNG • Max 2MB</p>
                         </div>
                         <input type="file" id="passportInput" accept=".jpg,.jpeg,.png" style="display:none" onchange="handleFileUpload('passport')">
-
-                        <!-- Passport Preview (shown at top-left of application in review) -->
                         <div class="passport-preview-container" id="passportPreviewContainer">
                             <img id="passportPreview" src="" alt="Passport Photo">
                             <span class="remove-preview" onclick="removeFile('passport')"><i class="fas fa-times"></i></span>
                         </div>
-
                         <div class="file-name-display" id="passportFileName">
                             <i class="fas fa-check-circle"></i>
                             <span id="passportFileNameText"></span>
@@ -909,32 +1060,17 @@
                         </div>
                         <div class="error-message" id="passportError">Please upload your passport photo.</div>
                     </div>
-                    <div class="form-group">
-                        <label>Upload Academic Certificates & ID (Optional)</label>
-                        <div class="file-upload-area" id="documentsUpload" onclick="document.getElementById('documentsInput').click()">
-                            <i class="fas fa-file-upload"></i>
-                            <p>Click to upload certificates or ID</p>
-                            <p class="file-types">National ID, Academic Certificates â€¢ JPG, PNG, PDF</p>
-                        </div>
-                        <input type="file" id="documentsInput" accept=".jpg,.jpeg,.png,.pdf" multiple style="display:none" onchange="handleFileUpload('documents')">
-
-                        <!-- Document Previews -->
-                        <div class="documents-preview-container" id="documentsPreviewContainer"></div>
-
-                        <div class="file-name-display" id="documentsFileName">
-                            <i class="fas fa-check-circle"></i>
-                            <span id="documentsFileNameText"></span>
-                            <span class="remove-file" onclick="removeFile('documents')"><i class="fas fa-times"></i></span>
-                        </div>
-                    </div>
                     <p style="font-size:0.85rem;color:var(--text-light);margin:20px 0;padding:12px;background:var(--off-white);border-radius:8px;">
                         <i class="fas fa-info-circle" style="color:var(--blue-accent);"></i> By submitting this application, you agree to our terms and conditions. Your data will be handled securely.
                     </p>
                     <div class="form-buttons">
                         <button type="button" class="btn btn-prev" onclick="prevStep(4)"><i class="fas fa-arrow-left"></i> Back</button>
-                        <button type="button" class="btn btn-primary" onclick="submitApplication()">
-                            <i class="fas fa-paper-plane"></i> Submit Application
-                        </button>
+                        <div style="display:flex;gap:10px;width:100%;justify-content:flex-end;">
+                            <button type="button" class="btn btn-blue" onclick="downloadFilledForm()"><i class="fas fa-download"></i> Download Filled Form</button>
+                            <button type="button" class="btn btn-primary" onclick="submitApplication()">
+                                <i class="fas fa-paper-plane"></i> Submit Application
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -944,12 +1080,15 @@
                     <h2><i class="fas fa-check-circle" style="color:#27ae60;"></i> Application Submitted Successfully!</h2>
                     <p>Your application has been received by Luso Technical College. Our admissions team will review your details and contact you within 2-3 business days.</p>
                     <div class="success-actions">
-                        <a href="https://wa.me/265995545449" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp Follow-up</a>
+                        <button type="button" class="btn btn-primary" onclick="downloadFilledForm()"><i class="fas fa-download"></i> Download Application</button>
+                        <button type="button" class="btn btn-whatsapp" onclick="sendApplicationToWhatsApp()"><i class="fab fa-whatsapp"></i> Send to WhatsApp</button>
                         <a href="#home" class="btn btn-outline" style="border-color:var(--primary-blue);color:var(--primary-blue);"><i class="fas fa-home"></i> Back to Home</a>
                     </div>
-                    <p style="margin-top:15px;font-size:0.85rem;color:var(--text-light);">
-                        <i class="fas fa-envelope"></i> Please check your email for a confirmation message from us.
-                    </p>
+                        <p style="margin-top:15px;font-size:0.85rem;color:var(--text-light);">
+                            <i class="fas fa-envelope"></i> Please check your email for a confirmation message from us.
+                        </p>
+                        <p id="emailStatus" style="margin-top:12px;font-size:0.9rem;color:var(--text-dark);display:none"></p>
+                        <p id="whatsappStatus" style="margin-top:8px;font-size:0.9rem;color:var(--text-dark);display:none"></p>
                 </div>
             </div>
         </div>
@@ -965,7 +1104,7 @@
                     <h3>Get In Touch</h3>
                     <p>Have a question about our programs, admissions, or anything else? Reach out to us and our team will be happy to help.</p>
                     <div class="contact-detail"><i class="fab fa-whatsapp"></i><div><h4>WhatsApp</h4><span>+265 995 545 449</span></div></div>
-                    <div class="contact-detail"><i class="fas fa-envelope"></i><div><h4>Email</h4><span>lusomalawi2023@gmail.com</span></div></div>
+                    <div class="contact-detail"><i class="fas fa-envelope"></i><div><h4>Email</h4><span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=lusomalawi2023@gmail.com" target="_blank" rel="noopener">lusomalawi2023@gmail.com</a></span></div></div>
                     <div class="contact-detail"><i class="fas fa-map-marker-alt"></i><div><h4>Lilongwe Campus</h4><span>Behind NBS Bank, European Business Centre Building</span></div></div>
                     <div class="contact-detail"><i class="fas fa-map-marker-alt"></i><div><h4>Blantyre Campus</h4><span>Yanakis Along Masauko Chipembere Highway, City Plaza Building, Floor 3</span></div></div>
                     <a href="https://wa.me/265995545449" target="_blank" class="btn btn-whatsapp" style="margin-top:15px;"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
@@ -1040,6 +1179,9 @@
     <a href="https://wa.me/265995545449" target="_blank" class="floating-whatsapp" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
     <!-- JAVASCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.9.2/dist/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         // Loading screen - hide after page loads
         window.addEventListener('load', function() {
@@ -1085,7 +1227,15 @@
         let currentStep = 1;
         let formData = {};
         let passportFile = null;
-        let documentsFiles = [];
+        let passportDataURL = null; // store base64/data URL of uploaded passport photo
+
+        // Serverless email endpoint (Formspree, Formspark, etc.)
+        // Replace with your endpoint URL that accepts multipart/form-data and forwards attachments to your email.
+        // Leave empty until you create the form to avoid accidental requests.
+        const FORM_EMAIL_ENDPOINT = '';
+        // Optional server endpoint that can send WhatsApp messages (your server using WhatsApp Cloud API)
+        // If you have a server-side endpoint that accepts multipart/form-data and will send the PDF via WhatsApp API, set it here.
+        const WHATSAPP_SEND_ENDPOINT = '';
 
         function updateStepIndicator() {
             document.querySelectorAll('.step-dot').forEach((dot, index) => {
@@ -1159,7 +1309,7 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         document.getElementById('passportPreview').src = e.target.result;
-                        document.getElementById('passportPreviewContainer').style.display = 'block';
+                        passportDataURL = e.target.result;
                         document.getElementById('passportUpload').style.display = 'none';
                         document.getElementById('passportFileName').classList.add('show');
                         document.getElementById('passportFileNameText').textContent = file.name;
@@ -1202,6 +1352,7 @@
         function removeFile(type) {
             if (type === 'passport') {
                 passportFile = null;
+                passportDataURL = null;
                 document.getElementById('passportInput').value = '';
                 document.getElementById('passportUpload').style.display = 'block';
                 document.getElementById('passportPreviewContainer').style.display = 'none';
@@ -1217,430 +1368,366 @@
             }
         }
 
-        // ===== PROFESSIONAL REVIEW BEFORE SUBMIT =====
-        function showApplicationReview() {
-            if (!validateStep(4)) return;
-
-            formData.course = document.getElementById('course').value;
-            formData.qualification = document.getElementById('qualification').value;
-            formData.school = document.getElementById('school').value.trim();
-            formData.motivation = document.getElementById('motivation').value.trim();
-
-            const passportSrc = document.getElementById('passportPreview').src || '';
-
-            let docsHTML = '<div class="review-doc-item"><i class="fas fa-check-circle" style="color:#27ae60;"></i> Passport Photo: ' + (passportFile ? passportFile.name : 'None') + '</div>';
-            if (documentsFiles.length > 0) {
-                docsHTML += '<div class="review-doc-item"><i class="fas fa-check-circle" style="color:#27ae60;"></i> Supporting Documents: ' + documentsFiles.map(f => f.name).join(', ') + '</div>';
-            } else {
-                docsHTML += '<div class="review-doc-item"><i class="fas fa-info-circle" style="color:#f5a623;"></i> No supporting documents uploaded</div>';
+        // ===== GENERATE & DOWNLOAD FILLED FORM =====
+        function downloadFilledForm() {
+            // read current form inputs so download reflects current values
+            try {
+                const el = id => document.getElementById(id) ? document.getElementById(id).value : '';
+                formData.fullName = el('fullName') || formData.fullName || '';
+                formData.dob = el('dob') || formData.dob || '';
+                formData.gender = el('gender') || formData.gender || '';
+                formData.phone = el('phone') || formData.phone || '';
+                formData.email = el('email') || formData.email || '';
+                formData.address = el('address') || formData.address || '';
+                formData.course = el('course') || formData.course || '';
+                formData.qualification = el('qualification') || formData.qualification || '';
+                formData.school = el('school') || formData.school || '';
+                formData.motivation = el('motivation') || formData.motivation || '';
+            } catch (e) {
+                console.warn('Unable to read all form inputs for download', e);
             }
-
-            const reviewHTML = `
-                <div class="review-container">
-                    <div class="review-header">
-                        <h3><i class="fas fa-clipboard-check"></i> Review Your Application</h3>
-                        <p>Please verify all details before submitting your application.</p>
-                    </div>
-                    <div class="review-body">
-                        <div class="review-photo-section">
-                            <div class="review-photo">
-                                <img src="${passportSrc}" alt="Passport Photo" id="reviewPassportImg">
-                            </div>
-                            <div class="review-photo-label">Passport Photo</div>
-                        </div>
-                        <div class="review-details">
-                            <div class="review-section-title">Personal Information</div>
-                            <table class="review-table">
-                                <tr><td class="review-label">Full Name</td><td class="review-value">${formData.fullName}</td></tr>
-                                <tr><td class="review-label">Date of Birth</td><td class="review-value">${formData.dob}</td></tr>
-                                <tr><td class="review-label">Gender</td><td class="review-value">${formData.gender}</td></tr>
-                                <tr><td class="review-label">Phone</td><td class="review-value">${formData.phone}</td></tr>
-                                <tr><td class="review-label">Email</td><td class="review-value">${formData.email}</td></tr>
-                                <tr><td class="review-label">Address</td><td class="review-value">${formData.address}</td></tr>
-                            </table>
-                            <div class="review-section-title" style="margin-top:20px;">Course Selection</div>
-                            <table class="review-table">
-                                <tr><td class="review-label">Selected Course</td><td class="review-value"><strong>${formData.course}</strong></td></tr>
-                            </table>
-                            <div class="review-section-title" style="margin-top:20px;">Education Background</div>
-                            <table class="review-table">
-                                <tr><td class="review-label">Highest Qualification</td><td class="review-value">${formData.qualification}</td></tr>
-                                <tr><td class="review-label">School Attended</td><td class="review-value">${formData.school}</td></tr>
-                            </table>
-                            <div class="review-section-title" style="margin-top:20px;">Motivation</div>
-                            <div class="review-motivation">${formData.motivation}</div>
-                            <div class="review-section-title" style="margin-top:20px;">Uploaded Documents</div>
-                            <div class="review-documents-list">${docsHTML}</div>
-                        </div>
-                    </div>
-                    <div class="review-footer">
-                        <button type="button" class="btn btn-prev" onclick="closeReview()"><i class="fas fa-arrow-left"></i> Edit Application</button>
-                        <button type="button" class="btn btn-primary" onclick="confirmSubmit()"><i class="fas fa-paper-plane"></i> Confirm & Submit</button>
-                    </div>
-                </div>
-            `;
-
-            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-            document.getElementById('stepIndicator').style.display = 'none';
-
-            const formContainer = document.getElementById('formContainer');
-            const existingReview = formContainer.querySelector('.review-container');
-            if (existingReview) existingReview.closest('.form-step').remove();
-
-            const reviewDiv = document.createElement('div');
-            reviewDiv.className = 'form-step active';
-            reviewDiv.style.animation = 'fadeIn 0.4s ease';
-            reviewDiv.innerHTML = reviewHTML;
-            formContainer.insertBefore(reviewDiv, document.getElementById('submissionSuccess'));
-        }
-
-        function closeReview() {
-            const review = document.querySelector('.review-container');
-            if (review) review.closest('.form-step').remove();
-            document.getElementById('stepIndicator').style.display = 'flex';
-            showStep(4);
-        }
-
-        // ===== GENERATE PROFESSIONAL PDF APPLICATION =====
-        function generatePDF(callback) {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF('p', 'mm', 'a4');
-            const pageWidth = doc.internal.pageSize.getWidth();
-            const pageHeight = doc.internal.pageSize.getHeight();
-            const margin = 20;
-            const contentWidth = pageWidth - 2 * margin;
-            let yPos = margin;
-
-            // Colors
-            const primaryBlue = [26, 58, 107];
-            const gold = [245, 166, 35];
-            const lightGray = [200, 200, 200];
-
-            // Helper functions
-            function addSectionTitle(text, y) {
-                doc.setFontSize(14);
-                doc.setFont(undefined, 'bold');
-                doc.setTextColor(primaryBlue[0], primaryBlue[1], primaryBlue[2]);
-                doc.text(text, margin, y);
-                doc.setDrawColor(gold[0], gold[1], gold[2]);
-                doc.setLineWidth(0.8);
-                doc.line(margin, y + 1.5, margin + 60, y + 1.5);
-                return y + 8;
-            }
-
-            function addField(label, value, y) {
-                doc.setFontSize(10);
-                doc.setFont(undefined, 'bold');
-                doc.setTextColor(100, 100, 100);
-                doc.text(label, margin, y);
-                doc.setFont(undefined, 'normal');
-                doc.setTextColor(50, 50, 50);
-                const valX = margin + 55;
-                doc.text(value || '-', valX, y);
-                doc.setDrawColor(lightGray[0], lightGray[1], lightGray[2]);
-                doc.setLineWidth(0.2);
-                doc.line(margin, y + 1.5, margin + contentWidth, y + 1.5);
-                return y + 7;
-            }
-
-            function addWrappedText(text, y, size, color, fontStyle) {
-                doc.setFontSize(size || 10);
-                doc.setFont(undefined, fontStyle || 'normal');
-                doc.setTextColor(color ? color[0] : 50, color ? color[1] : 50, color ? color[2] : 50);
-                const lines = doc.splitTextToSize(text, contentWidth);
-                doc.text(lines, margin, y);
-                return y + (lines.length * (size + 1 || 11));
-            }
-
-            // === HEADER ===
-            // Blue header background
-            doc.setFillColor(primaryBlue[0], primaryBlue[1], primaryBlue[2]);
-            doc.rect(0, 0, pageWidth, 42, 'F');
-
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(20);
-            doc.setFont(undefined, 'bold');
-            doc.text('LUSO TECHNICAL COLLEGE', pageWidth / 2, 18, { align: 'center' });
-            doc.setFontSize(10);
-            doc.setFont(undefined, 'normal');
-            doc.text('Official Application Form', pageWidth / 2, 28, { align: 'center' });
-            doc.setFontSize(8);
-            doc.setTextColor(gold[0], gold[1], gold[2]);
-            doc.text('"Agency for Change"', pageWidth / 2, 36, { align: 'center' });
-
-            yPos = 52;
-
-            // Application number and date
-            doc.setFontSize(8);
-            doc.setFont(undefined, 'normal');
-            doc.setTextColor(100, 100, 100);
+            const today = new Date().toLocaleDateString('en-MW', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
             const appRef = 'APP-' + Date.now().toString(36).toUpperCase();
-            doc.text('Application Ref: ' + appRef, margin, yPos);
-            doc.text('Date: ' + new Date().toLocaleDateString('en-MW', { weekday:'long', year:'numeric', month:'long', day:'numeric' }), pageWidth - margin, yPos, { align: 'right' });
+            const logoEl = document.querySelector('.nav-logo img');
+            const logoSrc = logoEl ? logoEl.src : 'LOGO.jpg';
 
-            yPos += 12;
+            const passportImgTag = passportDataURL ? `<img src="${passportDataURL}" alt="Passport Photo" style="width:120px;height:140px;object-fit:cover;border:1px solid #ccc;border-radius:6px;">` : 'No photo uploaded';
+            const headerPassportTag = passportDataURL ? `<div style="position:absolute;top:18px;right:18px;"><img src="${passportDataURL}" alt="Passport Photo" style="width:120px;height:140px;object-fit:cover;border:1px solid #ccc;border-radius:6px;"></div>` : '';
 
-            // === SECTION 1: PERSONAL INFORMATION ===
-            yPos = addSectionTitle('1. Personal Information', yPos);
+            const formHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luso Application - ${formData.fullName}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; color: #333; padding: 40px; line-height: 1.6; }
+        .header { background: #1a3a6b; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
+        .header img { height: 70px; display: block; margin: 0 auto 8px; }
+        .header h1 { font-size: 20px; margin-bottom: 6px; }
+        .header p { font-size: 13px; opacity: 0.9; }
+        .header .motto { color: #f5a623; font-style: italic; font-size: 12px; margin-top: 5px; }
+        .meta { display: flex; justify-content: space-between; padding: 12px 20px; background: #f5f5f5; font-size: 12px; color: #666; border-bottom: 2px solid #f5a623; }
+        .section { margin: 20px 0; }
+        .section-title { font-size: 16px; font-weight: bold; color: #1a3a6b; border-bottom: 2px solid #f5a623; padding-bottom: 5px; margin-bottom: 12px; }
+        table { width: 100%; border-collapse: collapse; }
+        td { padding: 8px 5px; font-size: 13px; border-bottom: 1px solid #eee; }
+        .label { color: #888; font-weight: bold; width: 160px; }
+        .value { color: #333; }
+        .motivation-box { background: #f9f9f9; padding: 12px; border-radius: 5px; font-style: italic; font-size: 13px; margin-top: 5px; }
+        .docs { margin-top: 10px; }
+        .docs li { font-size: 13px; color: #555; margin-bottom: 5px; }
+        .footer { margin-top: 30px; padding-top: 15px; border-top: 2px solid #f5a623; text-align: center; font-size: 11px; color: #999; }
+        .print-btn { display: block; width: 200px; margin: 25px auto; padding: 12px; background: #1a3a6b; color: white; text-align: center; border: none; border-radius: 5px; font-size: 14px; cursor: pointer; }
+        .print-btn:hover { background: #2a5298; }
+        @media print { .print-btn { display: none; } body { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <div style="position:relative;">
+        ${headerPassportTag}
+        <div class="header">
+        <img src="${logoSrc}" alt="Luso Logo">
+        <h1>LUSO TECHNICAL COLLEGE</h1>
+        <p>Official Application Form</p>
+        <div class="motto">"Agency for Change"</div>
+    </div>
+    <div class="meta">
+        <span><strong>Ref:</strong> ${appRef}</span>
+        <span><strong>Date:</strong> ${today}</span>
+    </div>
 
-            const fields1 = [
-                ['Full Name:', formData.fullName],
-                ['Date of Birth:', formData.dob],
-                ['Gender:', formData.gender],
-                ['Phone (WhatsApp):', formData.phone],
-                ['Email:', formData.email],
-                ['Home Address:', formData.address]
-            ];
-            fields1.forEach(f => { yPos = addField(f[0], f[1], yPos); });
+    <div class="section">
+        <div class="section-title">1. Personal Information</div>
+        <table>
+            <tr><td class="label">Full Name</td><td class="value">${formData.fullName}</td></tr>
+            <tr><td class="label">Date of Birth</td><td class="value">${formData.dob}</td></tr>
+            <tr><td class="label">Gender</td><td class="value">${formData.gender}</td></tr>
+            <tr><td class="label">Phone (WhatsApp)</td><td class="value">${formData.phone}</td></tr>
+            <tr><td class="label">Email</td><td class="value">${formData.email}</td></tr>
+            <tr><td class="label">Home Address</td><td class="value">${formData.address}</td></tr>
+        </table>
+    </div>
 
-            yPos += 5;
+    <div class="section">
+        <div class="section-title">2. Course Selection</div>
+        <table>
+            <tr><td class="label">Selected Program</td><td class="value"><strong>${formData.course}</strong></td></tr>
+        </table>
+    </div>
 
-            // === SECTION 2: COURSE SELECTION ===
-            yPos = addSectionTitle('2. Course Selection', yPos);
-            yPos = addField('Selected Program:', formData.course, yPos);
+    <div class="section">
+        <div class="section-title">3. Course Fees & Payment Information</div>
+        <table>
+            <tr><td class="label">Registration Fee</td><td class="value">K10,000 (Non-refundable)</td></tr>
+            <tr><td class="label">Course Duration</td><td class="value">See course details</td></tr>
+            <tr><td class="label">Payment Method</td><td class="value">Contact Admissions Team for options</td></tr>
+            <tr><td class="label">Account Details</td><td class="value">National Bank, Acc No: 1010530535</td></tr>
+        </table>
+        <p style="font-size:11px; color:#666; margin-top:10px;"><strong>2-Month Informal Courses:</strong> K150,000 | <strong>3-Month Courses:</strong> K250,000 per term | <strong>Diploma Courses:</strong> K250,000 per semester</p>
+    </div>
 
-            yPos += 5;
+    <div class="section">
+        <div class="section-title">4. Education Background</div>
+        <table>
+            <tr><td class="label">Highest Qualification</td><td class="value">${formData.qualification}</td></tr>
+            <tr><td class="label">School Attended</td><td class="value">${formData.school}</td></tr>
+        </table>
+    </div>
 
-            // === SECTION 3: EDUCATION BACKGROUND ===
-            yPos = addSectionTitle('3. Education Background', yPos);
-            const fields3 = [
-                ['Highest Qualification:', formData.qualification],
-                ['School Attended:', formData.school]
-            ];
-            fields3.forEach(f => { yPos = addField(f[0], f[1], yPos); });
+    <div class="section">
+        <div class="section-title">5. Motivation</div>
+        <div class="motivation-box">"${formData.motivation}"</div>
+    </div>
 
-            yPos += 5;
+    <div class="section">
+        <div class="section-title">6. Passport Photo</div>
+        <div style="margin-top:10px">${passportImgTag}</div>
+    </div>
 
-            // === SECTION 4: MOTIVATION ===
-            yPos = addSectionTitle('4. Motivation', yPos);
-            yPos = addWrappedText('"' + formData.motivation + '"', yPos, 9.5, [80, 80, 80], 'italic');
+    <button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
 
-            yPos += 8;
+    <div class="footer">
+        <p>Luso Technical College | Lilongwe & Blantyre Campuses | +265 995 545 449</p>
+        <p>This application was submitted via the Luso Technical College website.</p>
+    </div>
+</div>
+</body>
+</html>`;
 
-            // === SECTION 5: UPLOADED DOCUMENTS ===
-            yPos = addSectionTitle('5. Uploaded Documents', yPos);
+            // Generate PDF from the form HTML using html2canvas + jsPDF (bundled with html2pdf)
+            const filename = `Luso_Application_${(formData.fullName||'applicant').replace(/\s+/g, '_')}.pdf`;
+            const container = document.createElement('div');
+            container.style.position = 'fixed';
+            container.style.left = '-9999px';
+            container.style.top = '0';
+            container.style.width = '800px';
+            container.id = 'pdfExportContainer';
+            container.innerHTML = formHTML;
+            document.body.appendChild(container);
 
-            // Passport photo on the right side
-            const passportImg = document.getElementById('passportPreview');
-            if (passportImg && passportImg.src && passportImg.src.length > 100) {
+            try {
+                const html2canvasFn = window.html2canvas || window.Html2Canvas || null;
+                const jsPDFClass = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : (window.jsPDF ? window.jsPDF : (window.jspdf ? window.jspdf : null));
+
+                if (html2canvasFn && jsPDFClass) {
+                    html2canvasFn(container, { scale: 2, useCORS: true }).then(canvas => {
+                        const imgData = canvas.toDataURL('image/jpeg', 0.98);
+                        const pdf = new jsPDFClass('p', 'pt', 'a4');
+                        const pageWidth = pdf.internal.pageSize.getWidth();
+                        const margin = 20;
+                        const imgWidth = pageWidth - margin * 2;
+                        const imgHeight = canvas.height * (imgWidth / canvas.width);
+                        pdf.addImage(imgData, 'JPEG', margin, margin, imgWidth, imgHeight);
+                        pdf.save(filename);
+
+                        // Get PDF blob and attempt to send to configured email endpoint
+                        try {
+                            const pdfBlob = pdf.output('blob');
+                            if (FORM_EMAIL_ENDPOINT && !FORM_EMAIL_ENDPOINT.includes('your_form_id_here')) {
+                                sendPdfToEmailEndpoint(pdfBlob, filename).catch(err => console.warn('Email send failed', err));
+                            }
+                        } catch (e) { console.warn('Could not get PDF blob for sending', e); }
+
+                        if (container.parentNode) document.body.removeChild(container);
+                    }).catch(err => {
+                        console.error('html2canvas -> jsPDF failed', err);
+                        if (container.parentNode) document.body.removeChild(container);
+                        // fallback to html2pdf bundle
+                        if (window.html2pdf) {
+                            const opt = { margin: 10, filename, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true }, jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' } };
+                            html2pdf().from(container).set(opt).save().then(() => { if (container.parentNode) document.body.removeChild(container); }).catch(() => { if (container.parentNode) document.body.removeChild(container); });
+                        }
+                    });
+                } else if (window.html2pdf) {
+                    // use html2pdf bundle as fallback
+                    const opt = { margin: 10, filename, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true }, jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' } };
+                    html2pdf().from(container).set(opt).save().then(() => {
+                        // html2pdf handles download; attempt to POST the generated PDF by regenerating via html2canvas+jsPDF if possible
+                        try {
+                            const html2canvasFn2 = window.html2canvas || null;
+                            const jsPDFClass2 = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : (window.jsPDF ? window.jsPDF : null);
+                            if (html2canvasFn2 && jsPDFClass2) {
+                                html2canvasFn2(container, { scale: 2, useCORS: true }).then(canvas => {
+                                    const imgData = canvas.toDataURL('image/jpeg', 0.98);
+                                    const pdf = new jsPDFClass2('p', 'pt', 'a4');
+                                    const pageWidth = pdf.internal.pageSize.getWidth();
+                                    const margin = 20;
+                                    const imgWidth = pageWidth - margin * 2;
+                                    const imgHeight = canvas.height * (imgWidth / canvas.width);
+                                    pdf.addImage(imgData, 'JPEG', margin, margin, imgWidth, imgHeight);
+                                    const pdfBlob = pdf.output('blob');
+                                    if (FORM_EMAIL_ENDPOINT && !FORM_EMAIL_ENDPOINT.includes('your_form_id_here')) sendPdfToEmailEndpoint(pdfBlob, filename).catch(() => {});
+                                }).catch(() => {});
+                            }
+                        } catch(e){}
+                        if (container.parentNode) document.body.removeChild(container);
+                    }).catch(err => { console.error('html2pdf failed', err); if (container.parentNode) document.body.removeChild(container); });
+                } else {
+                    // final fallback: download HTML
+                    const blob = new Blob([formHTML], { type: 'text/html' });
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = `Luso_Application_${(formData.fullName||'applicant').replace(/\s+/g, '_')}.html`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(link.href);
+                    if (container.parentNode) document.body.removeChild(container);
+                }
+            } catch (err) {
+                console.error('Unexpected error generating PDF', err);
+                if (container.parentNode) document.body.removeChild(container);
+            }
+        }
+
+        // Send the PDF blob via multipart/form-data to a serverless endpoint (Formspree/Formspark)
+        async function sendPdfToEmailEndpoint(pdfBlob, filename) {
+            if (!FORM_EMAIL_ENDPOINT || FORM_EMAIL_ENDPOINT.includes('your_form_id_here')) {
+                console.warn('FORM_EMAIL_ENDPOINT not configured. Skipping email send.');
+                // Show UI feedback that email was not sent
+                const statusEl = document.getElementById('emailStatus');
+                if (statusEl) { statusEl.style.display = 'block'; statusEl.style.color = '#e67e22'; statusEl.textContent = 'Email not sent: server endpoint not configured.'; }
+                return;
+            }
+            const fd = new FormData();
+            fd.append('applicant_name', formData.fullName || '');
+            fd.append('applicant_email', formData.email || '');
+            fd.append('replyto', formData.email || ''); // some endpoints use this to set reply-to / cc
+            fd.append('send_copy', 'true'); // indicate to the endpoint that a copy should be sent to applicant
+            fd.append('application_pdf', pdfBlob, filename);
+            const statusEl = document.getElementById('emailStatus');
+            if (statusEl) { statusEl.style.display = 'block'; statusEl.style.color = '#3498db'; statusEl.textContent = 'Sending application to admissions...'; }
+
+            try {
+                const res = await fetch(FORM_EMAIL_ENDPOINT, { method: 'POST', body: fd });
+                if (!res.ok) {
+                    const errText = await res.text().catch(() => res.statusText || res.status);
+                    if (statusEl) { statusEl.style.color = '#e74c3c'; statusEl.textContent = 'Email send failed: ' + (errText || res.status); }
+                    throw new Error('Email endpoint responded with status ' + res.status);
+                }
+                if (statusEl) { statusEl.style.color = '#27ae60'; statusEl.textContent = 'Application sent to admissions successfully.'; }
+                return res;
+            } catch (err) {
+                console.warn('Error sending email', err);
+                if (statusEl) { statusEl.style.color = '#e74c3c'; statusEl.textContent = 'Error sending application. Please try again or contact admissions.'; }
+                throw err;
+            }
+        }
+
+        // Open WhatsApp chat with filled form text, and optionally POST the PDF to a server endpoint for automated sending
+        async function sendApplicationToWhatsApp() {
+            // Ensure current form data is read
+            try {
+                const el = id => document.getElementById(id) ? document.getElementById(id).value : '';
+                formData.fullName = el('fullName') || formData.fullName || '';
+                formData.dob = el('dob') || formData.dob || '';
+                formData.gender = el('gender') || formData.gender || '';
+                formData.phone = el('phone') || formData.phone || '';
+                formData.email = el('email') || formData.email || '';
+                formData.address = el('address') || formData.address || '';
+                formData.course = el('course') || formData.course || '';
+                formData.qualification = el('qualification') || formData.qualification || '';
+                formData.school = el('school') || formData.school || '';
+                formData.motivation = el('motivation') || formData.motivation || '';
+            } catch (e) { console.warn('Unable to read form for WhatsApp', e); }
+
+            const appRef = 'APP-' + Date.now().toString(36).toUpperCase();
+            const fullDetails =
+                `NEW APPLICATION - LUSO TECHNICAL COLLEGE\n` +
+                `Ref: ${appRef}\n` +
+                `Name: ${formData.fullName}\n` +
+                `DOB: ${formData.dob}\n` +
+                `Gender: ${formData.gender}\n` +
+                `Phone: ${formData.phone}\n` +
+                `Email: ${formData.email}\n` +
+                `Address: ${formData.address}\n` +
+                `Program: ${formData.course}\n` +
+                `Qualification: ${formData.qualification}\n` +
+                `School: ${formData.school}\n\n` +
+                `Motivation:\n${formData.motivation || ''}\n` +
+                `Passport: ${passportFile ? passportFile.name : 'N/A'}`;
+
+            const waMsg = encodeURIComponent(fullDetails);
+            // open WhatsApp chat to admissions number
+            window.open(`https://wa.me/265995545449?text=${waMsg}`, '_blank');
+
+            const statusEl = document.getElementById('whatsappStatus');
+            if (statusEl) { statusEl.style.display = 'block'; statusEl.style.color = '#3498db'; statusEl.textContent = 'Opened WhatsApp chat. If you want to attach the PDF, download it and attach manually.'; }
+
+            // If a server endpoint is configured, also send the generated PDF to it so the server can send via WhatsApp API
+            if (WHATSAPP_SEND_ENDPOINT) {
                 try {
-                    // Add passport photo in the top-right corner area
-                    doc.addImage(passportImg.src, 'JPEG', pageWidth - margin - 35, 52, 30, 36);
-                    // Border around it
-                    doc.setDrawColor(primaryBlue[0], primaryBlue[1], primaryBlue[2]);
-                    doc.setLineWidth(0.5);
-                    doc.rect(pageWidth - margin - 35, 52, 30, 36);
-                    doc.setFontSize(6);
-                    doc.setTextColor(100, 100, 100);
-                    doc.text('Passport Photo', pageWidth - margin - 20, 90, { align: 'center' });
-                } catch(e) {
-                    // Fallback if image fails
+                    // generate PDF blob (reuse download logic but don't trigger download)
+                    const container = document.createElement('div');
+                    container.style.position = 'fixed'; container.style.left = '-9999px'; container.style.top = '0'; container.style.width = '800px';
+                    const logoEl = document.querySelector('.nav-logo img');
+                    const logoSrc = logoEl ? logoEl.src : 'LOGO.jpg';
+                    const passportImgTag = passportDataURL ? `<img src="${passportDataURL}" alt="Passport Photo" style="width:120px;height:140px;object-fit:cover;border:1px solid #ccc;border-radius:6px;">` : '';
+                    const headerPassportTag = passportDataURL ? `<div style="position:absolute;top:18px;right:18px;"><img src="${passportDataURL}" alt="Passport Photo" style="width:120px;height:140px;object-fit:cover;border:1px solid #ccc;border-radius:6px;"></div>` : '';
+                    const pdfHtml = `<!doctype html><html><body>${headerPassportTag}<div><img src="${logoSrc}" style="height:70px"><h1>LUSO TECHNICAL COLLEGE</h1></div><div><h3>Ref: ${appRef}</h3></div><div><p>${fullDetails.replace(/\n/g,'<br>')}</p></div></body></html>`;
+                    container.innerHTML = pdfHtml;
+                    document.body.appendChild(container);
+                    // try html2canvas + jsPDF
+                    const html2canvasFn = window.html2canvas || window.Html2Canvas || null;
+                    const jsPDFClass = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : (window.jsPDF ? window.jsPDF : null);
+                    if (html2canvasFn && jsPDFClass) {
+                        const canvas = await html2canvasFn(container, { scale: 2, useCORS: true });
+                        const imgData = canvas.toDataURL('image/jpeg', 0.98);
+                        const pdf = new jsPDFClass('p', 'pt', 'a4');
+                        const pageWidth = pdf.internal.pageSize.getWidth();
+                        const margin = 20;
+                        const imgWidth = pageWidth - margin * 2;
+                        const imgHeight = canvas.height * (imgWidth / canvas.width);
+                        pdf.addImage(imgData, 'JPEG', margin, margin, imgWidth, imgHeight);
+                        const pdfBlob = pdf.output('blob');
+                        const fd = new FormData();
+                        fd.append('recipient', '265995545449');
+                        fd.append('applicant_name', formData.fullName || '');
+                        fd.append('applicant_email', formData.email || '');
+                        fd.append('application_pdf', pdfBlob, `Luso_Application_${(formData.fullName||'applicant').replace(/\s+/g,'_')}.pdf`);
+                        const res = await fetch(WHATSAPP_SEND_ENDPOINT, { method: 'POST', body: fd });
+                        if (!res.ok) throw new Error('WhatsApp send endpoint error ' + res.status);
+                        if (statusEl) { statusEl.style.color = '#27ae60'; statusEl.textContent = 'Application sent to WhatsApp via server.'; }
+                    } else {
+                        if (statusEl) { statusEl.style.color = '#e67e22'; statusEl.textContent = 'Server send not attempted: required client libs missing.'; }
+                    }
+                    if (container.parentNode) document.body.removeChild(container);
+                } catch (err) {
+                    console.warn('Error sending to server WhatsApp endpoint', err);
+                    if (statusEl) { statusEl.style.color = '#e74c3c'; statusEl.textContent = 'Failed to send application via server.'; }
                 }
             }
-
-            // List uploaded images as embedded in PDF
-            let docY = yPos;
-            if (passportFile) {
-                doc.setFontSize(9);
-                doc.setFont(undefined, 'normal');
-                doc.setTextColor(50, 50, 50);
-                doc.text('âœ“ Passport Photo: ' + passportFile.name, margin, docY);
-                docY += 5;
-            }
-
-            // Add certificate images into the PDF
-            if (documentsFiles.length > 0) {
-                documentsFiles.forEach((file, index) => {
-                    doc.setFontSize(9);
-                    doc.setFont(undefined, 'normal');
-                    doc.setTextColor(50, 50, 50);
-                    const isPDF = file.type === 'application/pdf' || file.name.endsWith('.pdf');
-                    doc.text('âœ“ ' + (isPDF ? 'Certificate (PDF): ' : 'Certificate Image: ') + file.name, margin, docY);
-                    docY += 5;
-
-                    // If it's an image, embed it directly in the PDF
-                    if (!isPDF) {
-                        const imgElement = document.querySelector('.document-preview-item img');
-                        if (imgElement && imgElement.src) {
-                            try {
-                                const certY = docY + 2;
-                                if (certY + 40 < pageHeight - margin) {
-                                    doc.addImage(imgElement.src, 'JPEG', margin, certY, contentWidth * 0.6, 35);
-                                    doc.setDrawColor(lightGray[0], lightGray[1], lightGray[2]);
-                                    doc.setLineWidth(0.3);
-                                    doc.rect(margin, certY, contentWidth * 0.6, 35);
-                                    doc.setFontSize(7);
-                                    doc.setTextColor(100, 100, 100);
-                                    doc.text(file.name, margin, certY + 38);
-                                    docY = certY + 42;
-                                }
-                            } catch(e) {}
-                        }
-                    } else {
-                        // For PDFs, note that PDF is attached separately
-                        doc.setFontSize(7);
-                        doc.setFont(undefined, 'italic');
-                        doc.setTextColor(150, 150, 150);
-                        doc.text('(PDF document - attached separately to this email)', margin + 5, docY);
-                        docY += 4;
-                    }
-                });
-            } else {
-                doc.setFontSize(9);
-                doc.setFont(undefined, 'normal');
-                doc.setTextColor(150, 150, 150);
-                doc.text('No supporting documents uploaded', margin, docY);
-                docY += 5;
-            }
-
-            yPos = Math.max(yPos, docY) + 10;
-
-            // === FOOTER ===
-            // Check if we need a new page
-            if (yPos > pageHeight - 30) {
-                doc.addPage();
-                yPos = margin;
-            }
-
-            // Footer line
-            doc.setDrawColor(gold[0], gold[1], gold[2]);
-            doc.setLineWidth(0.5);
-            doc.line(margin, yPos, pageWidth - margin, yPos);
-            yPos += 6;
-
-            doc.setFontSize(7);
-            doc.setFont(undefined, 'normal');
-            doc.setTextColor(100, 100, 100);
-            doc.text('Luso Technical College | Lilongwe & Blantyre Campuses | +265 995 545 449', pageWidth / 2, yPos, { align: 'center' });
-            yPos += 4;
-            doc.setTextColor(150, 150, 150);
-            doc.text('This application was submitted via the Luso Technical College website.', pageWidth / 2, yPos, { align: 'center' });
-
-            // Add college stamp/watermark
-            doc.setFontSize(40);
-            doc.setTextColor(230, 230, 230);
-            doc.setFont(undefined, 'bold');
-            doc.text('LTC', pageWidth / 2, pageHeight - 25, { align: 'center' });
-
-            // Get PDF as data URI
-            const pdfDataUri = doc.output('datauristring');
-            callback(pdfDataUri, appRef);
         }
 
         // ===== SUBMIT APPLICATION =====
         function submitApplication() {
             if (!validateStep(4)) return;
-            showApplicationReview();
-        }
+            formData.course = document.getElementById('course').value;
+            formData.qualification = document.getElementById('qualification').value;
+            formData.school = document.getElementById('school').value.trim();
+            formData.motivation = document.getElementById('motivation').value.trim();
 
-        async function confirmSubmit() {
-            const submitBtn = document.querySelector('.review-footer .btn-primary');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating Application...';
-            submitBtn.disabled = true;
+            // Generate and download the filled form as an HTML file for the user
+            downloadFilledForm();
 
-            try {
-                formData.course = document.getElementById('course').value;
-                formData.qualification = document.getElementById('qualification').value;
-                formData.school = document.getElementById('school').value.trim();
-                formData.motivation = document.getElementById('motivation').value.trim();
+            // Show submission success message (no automatic WhatsApp sending)
+            document.getElementById('submissionSuccess').classList.add('show');
 
-                // Generate professional PDF application
-                generatePDF(async function(pdfDataUri, appRef) {
-                    try {
-                        // Create a hidden download link to save the PDF
-                        const link = document.createElement('a');
-                        link.href = pdfDataUri;
-                        link.download = `Luso_Application_${formData.fullName.replace(/\s+/g, '_')}_${appRef}.pdf`;
-                        document.body.appendChild(link);
-                        
-                        // Build complete WhatsApp message with ALL application details as text
-                        const fullDetails =
-                            `*ðŸ“‹ NEW APPLICATION - LUSO TECHNICAL COLLEGE*\n` +
-                            `==================================\n` +
-                            `*Ref:* ${appRef}\n` +
-                            `*Date:* ${new Date().toLocaleDateString('en-MW')}\n\n` +
-                            `*ðŸ‘¤ PERSONAL INFORMATION*\n` +
-                            `*Name:* ${formData.fullName}\n` +
-                            `*DOB:* ${formData.dob}\n` +
-                            `*Gender:* ${formData.gender}\n` +
-                            `*Phone:* ${formData.phone}\n` +
-                            `*Email:* ${formData.email}\n` +
-                            `*Address:* ${formData.address}\n\n` +
-                            `*ðŸ“š COURSE*\n` +
-                            `*Program:* ${formData.course}\n\n` +
-                            `*ðŸŽ“ EDUCATION*\n` +
-                            `*Qualification:* ${formData.qualification}\n` +
-                            `*School:* ${formData.school}\n\n` +
-                            `*ðŸ’­ MOTIVATION*\n` +
-                            `${formData.motivation}\n\n` +
-                            `*ðŸ“Ž ATTACHMENTS*\n` +
-                            `*Passport:* ${passportFile ? passportFile.name : 'N/A'}\n` +
-                            `*Documents:* ${documentsFiles.length > 0 ? documentsFiles.map(f => f.name).join(', ') : 'None'}\n\n` +
-                            `_âœ… PDF application form is attached below._\n` +
-                            `_Please download and save the PDF for records._`;
+            // Reset to step 1 in the UI
+            currentStep = 1;
+            showStep(1);
 
-                        // 1. Open WhatsApp with ALL application details + instruction to download PDF
-                        const waMsg = encodeURIComponent(fullDetails);
-                        
-                        // Try to use WhatsApp Web URL that supports document sharing
-                        // First open WhatsApp with text
-                        const waWindow = window.open(`https://wa.me/265995545449?text=${waMsg}`, '_blank');
-                        
-                        // Trigger PDF download for the user to manually share to WhatsApp
-                        setTimeout(() => {
-                            link.click();
-                            document.body.removeChild(link);
-                        }, 1000);
-
-                        // 2. Also send professional email as backup with all details
-                        const emailSubject = encodeURIComponent(`Application - ${formData.fullName} - ${formData.course} [${appRef}]`);
-                        const emailBody = encodeURIComponent(
-                            `LUSO TECHNICAL COLLEGE - OFFICIAL APPLICATION FORM\n` +
-                            `====================================================\n\n` +
-                            `Reference: ${appRef}\n` +
-                            `Date: ${new Date().toLocaleDateString('en-MW', { weekday:'long', year:'numeric', month:'long', day:'numeric' })}\n\n` +
-                            `--- PERSONAL INFORMATION ---\n` +
-                            `Full Name: ${formData.fullName}\n` +
-                            `Date of Birth: ${formData.dob}\n` +
-                            `Gender: ${formData.gender}\n` +
-                            `Phone (WhatsApp): ${formData.phone}\n` +
-                            `Email: ${formData.email}\n` +
-                            `Home Address: ${formData.address}\n\n` +
-                            `--- COURSE SELECTED ---\n` +
-                            `Program of Study: ${formData.course}\n\n` +
-                            `--- EDUCATION BACKGROUND ---\n` +
-                            `Highest Qualification: ${formData.qualification}\n` +
-                            `School Attended: ${formData.school}\n\n` +
-                            `--- MOTIVATION ---\n` +
-                            `${formData.motivation}\n\n` +
-                            `--- ATTACHMENTS ---\n` +
-                            `Passport Photo: ${passportFile ? passportFile.name + ' (attached as image)' : 'Not provided'}\n` +
-                            (documentsFiles.length > 0 ? `Supporting Documents: ${documentsFiles.map(f => f.name).join(', ')}\n` : '') +
-                            `\nThe full PDF application has been downloaded and sent via WhatsApp.\n` +
-                            `====================================================\n` +
-                            `Submitted via Luso Technical College website.`
-                        );
-
-                        // Open email as backup
-                        window.location.href = `mailto:lusomalawi2023@gmail.com?subject=${emailSubject}&body=${emailBody}`;
-
-                        // Show success message
-                        setTimeout(() => {
-                            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-                            document.getElementById('submissionSuccess').classList.add('show');
-                        }, 2000);
-
-                    } catch (err) {
-                        alert('There was an error submitting your application. Please contact us on WhatsApp at +265 995 545 449');
-                        if (submitBtn) { submitBtn.innerHTML = originalText; submitBtn.disabled = false; }
-                    }
-                });
-
-            } catch (error) {
-                alert('There was an error generating your application. Please try again or contact us on WhatsApp at +265 995 545 449');
-                if (submitBtn) { submitBtn.innerHTML = originalText; submitBtn.disabled = false; }
-            }
+            // Clear form inputs visually
+            document.querySelectorAll('#formContainer input, #formContainer select, #formContainer textarea').forEach(el => {
+                if (el.type === 'file') el.value = '';
+                else el.value = '';
+                el.classList.remove('error');
+            });
+            // Clear uploaded previews
+            removeFile('passport');
+            formData = {};
         }
 
         // ===== CONTACT FORM =====
